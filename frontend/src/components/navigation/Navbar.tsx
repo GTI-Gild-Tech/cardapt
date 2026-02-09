@@ -45,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <div className="flex justify-center">
-      <nav className="flex lg:mx-[20%] mx-5 w-[70vh] items-center mt-6">
+      <nav className="flex lg:mx-[20%] mx-5 w-[55vh] items-center mt-6">
         <div className="mx-auto  rounded-full bg-white/90 p-2 shadow ">
           <div className="flex items-center gap-2 ">
             <Link to="/dashboard-admin/home" className="no-underline">
@@ -60,11 +60,11 @@ const Navbar: React.FC<NavbarProps> = () => {
               </NavButton>
             </Link>
 
-            <Link to="/dashboard-admin/fidelidade" className="no-underline">
+            {/* <Link to="/dashboard-admin/fidelidade" className="no-underline">
               <NavButton active={isActive("/dashboard-admin/fidelidade")}>
                 Fidelidade
               </NavButton>
-            </Link>
+            </Link> */}
 
             <Link to="/dashboard-admin/cardapio" className="no-underline">
               <NavButton active={isActive("/dashboard-admin/cardapio")}>
