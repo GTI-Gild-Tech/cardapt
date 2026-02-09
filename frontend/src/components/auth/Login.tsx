@@ -28,7 +28,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <div className="flex items-center justify-center min-h-screen bg-[#f0eee9]">
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
         {/* Título */}
-        <h2 className="text-3xl font-bold text-center text-[#0f4c50] mb-6 font-[Retrokia]">
+        <h2 className="text-3xl font-bold text-center text-textColorPrimary mb-6 font-[PrimaryFont]">
           Login Administrativo
         </h2>
 
@@ -41,7 +41,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
-              className="block text-sm font-medium text-[#0f4c50] mb-1"
+              className="block text-sm font-medium text-textColorPrimary mb-1"
               htmlFor="username"
             >
               Usuário
@@ -52,13 +52,13 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
               placeholder="Digite aqui..."
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0f4c50] text-gray-700"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-gray-700"
             />
           </div>
 
           <div>
             <label
-              className="block text-sm font-medium text-[#0f4c50] mb-1"
+              className="block text-sm font-medium text-textColorPrimary mb-1"
               htmlFor="password"
             >
               Senha
@@ -69,14 +69,14 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
               placeholder="•••••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0f4c50] text-gray-700"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-gray-700"
             />
           </div>
 
           {/* Botão */}
           <button
             type="submit"
-            className="w-full bg-[#0f4c50] hover:bg-[#0d4247] text-white font-semibold py-3 rounded-lg shadow-md transition"
+            className="w-full bg-primary hover:bg-primaryHover text-white font-semibold py-3 rounded-lg shadow-md transition"
           >
             Entrar
           </button>

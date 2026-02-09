@@ -20,7 +20,7 @@ const { itemsCount: cartCount } = useCart();
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <nav
-        className="bg-[#c1a07b] rounded-bl-[50px] rounded-br-[50px] px-20 py-5 flex items-center gap-5"
+        className="bg-quaternary rounded-bl-[50px] rounded-br-[50px] px-20 py-5 flex items-center gap-5"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -30,7 +30,7 @@ const { itemsCount: cartCount } = useCart();
             <Button
               variant="ghost"
               size="icon"
-              className="bg-white/20 hover:bg-white/30 transition-colors duration-300"
+              className="bg-primary/20 hover:bg-primaryHover/30 transition-colors duration-300"
               aria-label="Admin"
             >
               <ShieldAlert className="h-8 w-8 text-white" />
@@ -44,7 +44,7 @@ const { itemsCount: cartCount } = useCart();
             <Button
               variant="ghost"
               size="icon"
-              className="bg-white/20 hover:bg-white/30 transition-colors duration-300"
+              className="bg-primary/20 hover:bg-primaryHover/30 transition-colors duration-300"
               aria-label="Home"
             >
               <HomeIcon className="h-8 w-8 text-white" />
@@ -57,7 +57,7 @@ const { itemsCount: cartCount } = useCart();
           <Button
             variant="ghost"
             size="icon"
-            className="bg-white/20 hover:bg-white/30 relative transition-colors duration-300"
+            className="bg-primary/20 hover:bg-primaryHover/30 transition-colors duration-300"
             onClick={onOpenCart}
             aria-label={`Shopping cart ${cartCount > 0 ? `with ${cartCount} items` : "empty"}`}
           >

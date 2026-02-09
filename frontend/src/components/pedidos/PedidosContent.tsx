@@ -69,7 +69,7 @@ function ActionButton(
   const styles =
     variant === "outline"
       ? "border hover:bg-gray-50"
-      : "bg-[#0f4c50] text-white hover:bg-[#0d4247]";
+      : "bg-primary text-white hover:bg-primaryHover";
   return <button className={`${base} ${styles} ${className}`} {...rest} />;
 }
 
@@ -122,7 +122,7 @@ function OrderDetailsModal({ open, onClose, order }: OrderDetailsModalProps) {
         {/* header */}
         <div className="flex items-start justify-between p-6">
           <div className="space-y-1 text-left">
-            <h2 className="text-2xl font-bold text-[#0f4c50]">
+            <h2 className="text-2xl font-bold text-textColorPrimary">
               Pedido {titleNumber}
             </h2>
             <p className="text-sm text-gray-700">
@@ -184,7 +184,7 @@ function OrderDetailsModal({ open, onClose, order }: OrderDetailsModalProps) {
               {/* Total */}
               <div className="flex items-center justify-end gap-6 px-4 py-5">
                 <div className="text-right text-[15px] text-gray-600">Total</div>
-                <div className="text-2xl font-extrabold text-[#0f4c50]">
+                <div className="text-2xl font-extrabold text-textColorPrimary">
                   {totalLabel || "—"}
                 </div>
               </div>
@@ -331,7 +331,7 @@ export default function PedidosContent() {
         )}
         <button
           onClick={refresh}
-          className="bg-[#0f4c50] hover:bg-[#0d4247] transition-colors text-white px-3 py-2 text-[13px] rounded-[5px] h-[36.8px]"
+          className="bg-primary hover:bg-primaryHover transition-colors text-white px-3 py-2 text-[13px] rounded-[5px] h-[36.8px]"
         >
           Atualizar
         </button>
@@ -343,7 +343,7 @@ export default function PedidosContent() {
           Nenhum pedido por aqui ainda.
           <button
             onClick={refresh}
-            className="ml-3 rounded bg-[#0f4c50] px-3 py-1 text-white hover:bg-[#0d4247]"
+            className="ml-3 rounded bg-primary px-3 py-1 text-white hover:bg-primaryHover"
           >
             Atualizar
           </button>
@@ -358,7 +358,7 @@ export default function PedidosContent() {
                 {/* Bloco esquerdo: dados */}
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-semibold text-[#0f4c50]">
+                    <h3 className="text-lg font-semibold text-textColorPrimary">
                       Pedido #{o.orderNumber ?? o.id}
                     </h3>
                     <StatusPill status={o.status} />

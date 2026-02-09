@@ -2,7 +2,7 @@ import svgPaths from "./svg-2mmpuj4g7j";
 
 function Frame3() {
   return (
-    <div className="bg-[#c1a07b] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-secondary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(115,82,46,0.3)]" />
       <div className="flex flex-col font-['Rethink_Sans:Bold',_sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[#ffffff] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Pedidos</p>
@@ -13,7 +13,7 @@ function Frame3() {
 
 function Frame6() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Fidelidade</p>
@@ -24,7 +24,7 @@ function Frame6() {
 
 function Frame4() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cardapio</p>
@@ -35,7 +35,7 @@ function Frame4() {
 
 function Frame5() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cadastro</p>
@@ -208,7 +208,7 @@ function TableCell9() {
 
 function TableRow() {
   return (
-    <div className="bg-[#c1a07b] content-stretch flex items-start justify-start overflow-clip relative shrink-0 w-full" data-name="Table/Row">
+    <div className="bg-secondary content-stretch flex items-start justify-start overflow-clip relative shrink-0 w-full" data-name="Table/Row">
       <TableCell1 />
       <TableCell3 />
       <TableCell5 />
@@ -315,7 +315,7 @@ function TableCell15() {
 function Frame4776() {
   return (
     <div className="content-stretch flex gap-[9px] h-0 items-center justify-center relative shrink-0">
-      <div className="font-['Rethink_Sans:Medium',_sans-serif] font-medium leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-center text-nowrap tracking-[-0.494px]">
+      <div className="font-['Rethink_Sans:Medium',_sans-serif] font-medium leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-center text-nowrap tracking-[-0.494px]">
         <p className="leading-[0px] whitespace-pre">Ver pedido</p>
       </div>
     </div>
@@ -325,7 +325,7 @@ function Frame4776() {
 function Frame4782() {
   return (
     <div className="content-stretch flex gap-[52px] h-[23px] items-center justify-center relative rounded-[43px] shrink-0 w-[125px]">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[43px]" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[43px]" />
       <Frame4776 />
     </div>
   );
@@ -364,7 +364,7 @@ function Frame4777() {
 
 function Frame4784() {
   return (
-    <div className="bg-[#0f4c50] content-stretch flex gap-[52px] h-[23px] items-center justify-center relative rounded-[43px] shrink-0 w-[125px]">
+    <div className="bg-primary content-stretch flex gap-[52px] h-[23px] items-center justify-center relative rounded-[43px] shrink-0 w-[125px]">
       <Frame4777 />
     </div>
   );
@@ -460,22 +460,22 @@ function Frame122() {
       <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#fbfbfb] w-3.5">
         <p className="leading-[normal]">1</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">2</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">3</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">4</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">5</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">6</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">7</p>
       </div>
     </div>
@@ -550,7 +550,7 @@ function Frame123() {
 function LeftSide8Column() {
   return (
     <div className="basis-0 box-border content-stretch flex flex-col gap-[25px] grow items-center justify-start min-h-px min-w-px px-0 py-[50px] relative shrink-0 w-full" data-name="Left side 8 Column">
-      <div className="font-['Retrokia:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#0f4c50] text-[64px] text-nowrap tracking-[-1.28px]">
+      <div className="font-['PrimaryFont:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-textColorPrimary text-[64px] text-nowrap tracking-[-1.28px]">
         <p className="leading-[1.5] whitespace-pre">Pedidos</p>
       </div>
       <Table />
@@ -614,7 +614,7 @@ function Frame4867() {
 function Frame4778() {
   return (
     <div className="box-border content-stretch flex font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold gap-1.5 h-[95px] items-center justify-start leading-[0] px-0 py-1 relative shrink-0 text-[24px] text-nowrap">
-      <div className="relative shrink-0 text-[#0f4c50]">
+      <div className="relative shrink-0 text-textColorPrimary">
         <p className="leading-[normal] text-nowrap whitespace-pre">Cappuccino</p>
       </div>
       <div className="relative shrink-0 text-[#000000]">
@@ -721,22 +721,22 @@ function Frame135() {
       <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#fbfbfb] w-3.5">
         <p className="leading-[normal]">1</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">2</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">3</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">4</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">5</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">6</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">7</p>
       </div>
     </div>

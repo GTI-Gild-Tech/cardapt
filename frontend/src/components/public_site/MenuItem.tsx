@@ -69,10 +69,10 @@ export function MenuItem({ item, onAddToCart }: MenuItemProps) {
         </p>
         <div className="flex gap-4 font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[18px] text-[#797474]">
           <span>
-            <span className="text-[#0f4c50]">P</span> {formatPrice(item.priceP)}
+            <span className="text-textColorPrimary">P</span> {formatPrice(item.priceP)}
           </span>
           <span>
-            <span className="text-[#0f4c50]">M</span> {formatPrice(item.priceM)}
+            <span className="text-textColorPrimary">M</span> {formatPrice(item.priceM)}
           </span>
         </div>
       </div>
@@ -93,10 +93,10 @@ export function MenuItem({ item, onAddToCart }: MenuItemProps) {
               }}
               className={`w-[35px] h-[35px] rounded-[10px] flex items-center justify-center font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[20px] border transition-colors ${
                 selectedSize === 'P' 
-                  ? 'bg-[#0f4c50] text-white border-[#0f4c50]' 
+                  ? 'bg-primary text-white border-primary' 
                   : showSizeError
                   ? 'bg-white text-red-500 border-red-500'
-                  : 'bg-white text-[#797474] border-[#d9d9d9] hover:border-[#0f4c50] hover:text-[#0f4c50]'
+                  : 'bg-white text-[#797474] border-[#d9d9d9] hover:border-primaryHover hover:text-textColorPrimary'
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -112,10 +112,10 @@ export function MenuItem({ item, onAddToCart }: MenuItemProps) {
               }}
               className={`w-[35px] h-[35px] rounded-[10px] flex items-center justify-center font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[20px] border transition-colors ${
                 selectedSize === 'M' 
-                  ? 'bg-[#0f4c50] text-white border-[#0f4c50]' 
+                  ? 'bg-primary text-white border-primary' 
                   : showSizeError
                   ? 'bg-white text-red-500 border-red-500'
-                  : 'bg-white text-[#797474] border-[#d9d9d9] hover:border-[#0f4c50] hover:text-[#0f4c50]'
+                  : 'bg-white text-[#797474] border-[#d9d9d9] hover:border-primaryHover hover:text-textColorPrimary'
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

@@ -30,7 +30,7 @@ export default function ConfirmDialog({
       {/* card */}
       <div className="absolute top-[30%] w-[92%] max-w-xl rounded-lg bg-[#f9f8f5] p-6 shadow-2xl md:p-8">
         <header className="mb-3 flex items-start justify-between">
-          <h2 className="text-2xl font-semibold text-[#0f4c50]">
+          <h2 className="text-2xl font-semibold text-textColorPrimary">
             {title}
           </h2>
           <button
@@ -47,14 +47,14 @@ export default function ConfirmDialog({
         <div className="flex items-center justify-end gap-3">
           <button
             onClick={onClose}
-            className="rounded-lg border border-[#0f4c50]/30 px-5 py-2 text-[#0f4c50] hover:bg-[#0f4c50]/5"
+            className="rounded-lg border border-primary/30 px-5 py-2 text-textColorPrimary hover:bg-primaryHover/10"
             disabled={isBusy}
           >
             {cancelText}
           </button>
           <button
             onClick={onConfirm}
-            className="rounded-lg bg-[#0f4c50] px-5 py-2 font-medium text-white hover:opacity-90 disabled:opacity-60"
+            className="rounded-lg bg-primary px-5 py-2 font-medium text-white hover:opacity-90 disabled:opacity-60"
             disabled={isBusy}
           >
             {isBusy ? "Processando..." : confirmText}

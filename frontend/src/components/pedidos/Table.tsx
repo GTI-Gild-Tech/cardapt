@@ -136,7 +136,7 @@ export function Table({ searchTerm, startDate, endDate, orders }: TableProps) {
         <div aria-hidden className="absolute border border-[#b9b9b9] border-solid inset-0 pointer-events-none" />
 
         {/* Header */}
-        <div className="bg-[#c1a07b] content-stretch flex items-start justify-start overflow-clip relative shrink-0 w-full">
+        <div className="bg-secondary content-stretch flex items-start justify-start overflow-clip relative shrink-0 w-full">
           <div className="basis-0 content-stretch flex flex-col gap-2.5 grow items-start justify-start min-h-px min-w-px relative self-stretch shrink-0">
             <TableHeaderCell>Número</TableHeaderCell>
           </div>
@@ -222,7 +222,7 @@ export function Table({ searchTerm, startDate, endDate, orders }: TableProps) {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/40" onClick={cancelReopen} />
           <div className="relative bg-white w-full max-w-md rounded-lg shadow-xl p-6">
-            <h3 className="text-lg font-bold text-[#0f4c50] mb-2">Reabrir pedido?</h3>
+            <h3 className="text-lg font-bold text-textColorPrimary mb-2">Reabrir pedido?</h3>
             <p className="text-sm text-gray-700 mb-4">
               Você deseja reabrir o pedido{" "}
               <span className="font-semibold">{confirmOrder.orderNumber || confirmOrder.id}</span>?
@@ -231,7 +231,7 @@ export function Table({ searchTerm, startDate, endDate, orders }: TableProps) {
               <button onClick={cancelReopen} className="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-800">
                 Cancelar
               </button>
-              <button onClick={confirmReopen} className="px-4 py-2 rounded-md bg-[#0f4c50] hover:bg-[#0d4247] text-white">
+              <button onClick={confirmReopen} className="px-4 py-2 rounded-md bg-primary hover:bg-primaryHover text-white">
                 Reabrir
               </button>
             </div>

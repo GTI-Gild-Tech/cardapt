@@ -109,7 +109,7 @@ export function Checkout({ isOpen, onClose, onBackToCart, items, onOrderComplete
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <div className="font-['Rethink_Sans:ExtraBold',sans-serif] font-extrabold text-[42px] text-[#0f4c50] leading-[41px] tracking-[0.396px] w-[343px]">
+            <div className="font-['Rethink_Sans:ExtraBold',sans-serif] font-extrabold text-[42px] text-textColorPrimary leading-[41px] tracking-[0.396px] w-[343px]">
               Meus dados
             </div>
           </motion.div>
@@ -206,7 +206,7 @@ export function Checkout({ isOpen, onClose, onBackToCart, items, onOrderComplete
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="absolute left-0 bottom-0 w-[539px] h-[83px] bg-[#0f4c50] rounded-[43px] flex items-center justify-between px-[25px] py-[13px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute left-0 bottom-0 w-[539px] h-[83px] bg-primary rounded-[43px] flex items-center justify-between px-[25px] py-[13px] disabled:opacity-50 disabled:cursor-not-allowed"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}

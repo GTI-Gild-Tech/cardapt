@@ -77,13 +77,13 @@ const Navbar: React.FC<NavbarProps> = () => {
           {/* Botão do carrinho */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="items-center gap-2 rounded-full lg:inline-flex hidden bg-white/90 px-3 py-2 text-[#0f4c50] shadow hover:bg-gray-50"
+            className="items-center gap-2 rounded-full lg:inline-flex hidden bg-white/90 px-3 py-2 text-textColorPrimary shadow hover:bg-gray-50"
             aria-label="Abrir carrinho"
           >
             <ShoppingCart className="h-5 w-5" />
             <span className="text-sm font-medium">{subtotalLabel}</span>
             {itemsCount > 0 && (
-              <span className="rounded-full bg-[#0f4c50] px-2 py-0.5 text-xs font-bold text-white">
+              <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-bold text-white">
                 {itemsCount}
               </span>
             )}

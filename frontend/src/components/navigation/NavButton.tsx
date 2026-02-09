@@ -13,8 +13,8 @@ export default function NavButton({ active, children }: NavButtonProps) {
       className={clsx(
         "px-4 py-2 rounded-full text-sm font-medium transition-colors",
         active
-          ? "bg-[#c1a07b] text-white shadow"
-          : "bg-transparent text-[#0f4c50] hover:bg-gray-100"
+          ? "bg-primary text-white shadow"
+          : "bg-transparent text-textColorPrimary hover:bg-gray-100"
       )}
     >
       {children}

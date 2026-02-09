@@ -33,7 +33,7 @@ function Depth11Frame0() {
 
 function Frame9() {
   return (
-    <div className="bg-[#c1a07b] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
+    <div className="bg-secondary box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
       <Depth11Frame0 />
     </div>
   );
@@ -62,7 +62,7 @@ function Frame() {
 
 function Frame10() {
   return (
-    <div className="bg-[#c1a07b] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
+    <div className="bg-secondary box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
       <Frame />
     </div>
   );

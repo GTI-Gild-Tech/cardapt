@@ -3,8 +3,8 @@ import svgPaths from "./svg-gf3getow1k";
 function BadgeGhost() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">{`Tamanho `}</p>
       </div>
     </div>
@@ -13,8 +13,8 @@ function BadgeGhost() {
 
 function BadgeGhost1() {
   return (
-    <div className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
+    <div className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0" data-name="badge ghost">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
       <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[14px] text-nowrap text-white">
         <p className="leading-[1.4] whitespace-pre">Quantidade</p>
       </div>
@@ -25,8 +25,8 @@ function BadgeGhost1() {
 function BadgeGhost2() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Único</p>
       </div>
     </div>
@@ -128,8 +128,8 @@ function Frame9() {
 function BadgeGhost3() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Opção 1</p>
       </div>
       <Frame9 />
@@ -166,8 +166,8 @@ function Frame4876() {
 function BadgeGhost5() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-[2px] shrink-0 w-[92px]" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Opção 1</p>
       </div>
     </div>

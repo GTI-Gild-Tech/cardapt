@@ -42,9 +42,9 @@ export function CadastroBadgeGhost({ children, className = "" }: CadastroBadgeGh
     >
       <div
         aria-hidden="true"
-        className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm"
+        className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm"
       />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">
           {children}
         </p>

@@ -91,7 +91,7 @@ interface CadastroButtonProps {
 export function CadastroButton({ onFinalizarCadastro }: CadastroButtonProps) {
   return (
     <div
-      className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-start px-[273px] py-4 relative rounded-[50px] shrink-0 cursor-pointer hover:bg-[#0d4247] transition-colors"
+      className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-start px-[273px] py-4 relative rounded-[50px] shrink-0 cursor-pointer hover:bg-primaryHover transition-colors"
       data-name="Main Button"
       onClick={() => onFinalizarCadastro?.()}
     >

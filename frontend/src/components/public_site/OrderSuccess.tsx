@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import svgPaths from "../../imports/svg-yafp8q3jr7";
-import imgDrink from "./../../assets/6feb31b16ef07d8aad72ffc0a24969c050e5a069.png";
+import imgDrink from "./../../assets/square.png";
 
 interface OrderSuccessProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ export function OrderSuccess({ isOpen, onClose, customerName, tableNumber, total
   if (!isOpen) return null;
 
   const handleEvaluate = () => {
-    window.open('https://share.google/KymJkgB4Jm5nZIIho', '_blank');
+    window.open('https://gildtechinformation.com/', '_blank');
     onClose();
   };
 
@@ -82,7 +82,7 @@ export function OrderSuccess({ isOpen, onClose, customerName, tableNumber, total
                 aria-hidden
               >
                 {/* tamanhos responsivos */}
-                <div className="w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48" />
+                <div className="w-20 h-20 sm:w-30 sm:h-30 md:w-40 md:h-40" />
               </motion.div>
 
               {/* Título */}
@@ -163,9 +163,9 @@ export function OrderSuccess({ isOpen, onClose, customerName, tableNumber, total
                 className="
                   w-full sm:w-80 md:w-[28rem]
                   py-3 mt-10 sm:py-4
-                  rounded-full border border-[#0f4c50]
+                  rounded-full border border-primary
                   flex items-center justify-center
-                  hover:bg-[#0f4c50]/5
+                  hover:bg-primaryHover/10
                   transition-colors
                 "
                 initial={{ opacity: 0, y: 12 }}
@@ -175,7 +175,7 @@ export function OrderSuccess({ isOpen, onClose, customerName, tableNumber, total
                 whileTap={{ scale: 0.97 }}
               >
                 <span
-                  className="font-['Roboto:Regular',_sans-serif] text-[#0f4c50]
+                  className="font-['Roboto:Regular',_sans-serif] text-textColorPrimary
                              text-base sm:text-lg md:text-xl"
                   style={{ fontVariationSettings: "'wdth' 100" }}
                 >

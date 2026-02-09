@@ -50,7 +50,7 @@ export function Pagination({ svgPaths }: PaginationProps) {
               className={`flex flex-col h-[13px] justify-end relative shrink-0 w-3.5 cursor-pointer ${
                 page === currentPage
                   ? "text-[#fbfbfb]"
-                  : "text-[#0f4c50] hover:text-[#0a3c3f]"
+                  : "text-textColorPrimary hover:text-[#0a3c3f]"
               }`}
               onClick={() => setCurrentPage(page)}
             >

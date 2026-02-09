@@ -2,7 +2,7 @@ import svgPaths from "./svg-ejfntw7pf1";
 
 function Frame3() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Pedidos</p>
@@ -13,7 +13,7 @@ function Frame3() {
 
 function Frame6() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Fidelidade</p>
@@ -24,7 +24,7 @@ function Frame6() {
 
 function Frame4() {
   return (
-    <div className="bg-[#c1a07b] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-secondary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(115,82,46,0.3)]" />
       <div className="flex flex-col font-['Rethink_Sans:Bold',_sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[#ffffff] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cardápio</p>
@@ -35,7 +35,7 @@ function Frame4() {
 
 function Frame5() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cadastro</p>
@@ -58,8 +58,8 @@ function Navbar() {
 function BadgeGhost() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho M</p>
       </div>
     </div>
@@ -69,8 +69,8 @@ function BadgeGhost() {
 function BadgeGhost1() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho G</p>
       </div>
     </div>
@@ -89,7 +89,7 @@ function Tags() {
 function Frame4858() {
   return (
     <div className="content-stretch flex gap-2 items-center justify-start relative shrink-0 w-[259px]">
-      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#0f4c50] text-[24px] text-nowrap">
+      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-textColorPrimary text-[24px] text-nowrap">
         <p className="leading-[1.5] whitespace-pre">Avelã</p>
       </div>
       <Tags />
@@ -143,7 +143,7 @@ function Frame4872() {
 
 function Ticket() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
+    <div className="bg-tertiary box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
       <Frame4858 />
       <Frame4872 />
     </div>
@@ -154,14 +154,14 @@ function Kanban() {
   return (
     <div className="bg-[#ffffff] relative rounded-2xl shrink-0" data-name="Kanban">
       <div className="box-border content-stretch flex flex-col gap-4 items-center justify-start overflow-clip p-[24px] relative">
-        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-[#0f4c50] text-[37px]" style={{ width: "min-content" }}>
+        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-textColorPrimary text-[37px]" style={{ width: "min-content" }}>
           <p className="leading-[44px]">Cappuccinos</p>
         </div>
         {[...Array(4).keys()].map((_, i) => (
           <Ticket key={i} />
         ))}
       </div>
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-2xl" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-2xl" />
     </div>
   );
 }
@@ -169,8 +169,8 @@ function Kanban() {
 function BadgeGhost8() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho M</p>
       </div>
     </div>
@@ -180,8 +180,8 @@ function BadgeGhost8() {
 function BadgeGhost9() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho G</p>
       </div>
     </div>
@@ -200,7 +200,7 @@ function Tags4() {
 function Frame4863() {
   return (
     <div className="content-stretch flex gap-2 items-center justify-start relative shrink-0 w-[259px]">
-      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#0f4c50] text-[24px] text-nowrap">
+      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-textColorPrimary text-[24px] text-nowrap">
         <p className="leading-[1.5] whitespace-pre">Avelã</p>
       </div>
       <Tags4 />
@@ -254,7 +254,7 @@ function Frame4881() {
 
 function Ticket4() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
+    <div className="bg-tertiary box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
       <Frame4863 />
       <Frame4881 />
     </div>
@@ -265,14 +265,14 @@ function Kanban1() {
   return (
     <div className="bg-[#ffffff] relative rounded-2xl shrink-0" data-name="Kanban">
       <div className="box-border content-stretch flex flex-col gap-4 items-center justify-start overflow-clip p-[24px] relative">
-        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-[#0f4c50] text-[37px]" style={{ width: "min-content" }}>
+        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-textColorPrimary text-[37px]" style={{ width: "min-content" }}>
           <p className="leading-[44px]">Cafes</p>
         </div>
         {[...Array(4).keys()].map((_, i) => (
           <Ticket4 key={i} />
         ))}
       </div>
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-2xl" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-2xl" />
     </div>
   );
 }
@@ -280,8 +280,8 @@ function Kanban1() {
 function BadgeGhost16() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho M</p>
       </div>
     </div>
@@ -291,8 +291,8 @@ function BadgeGhost16() {
 function BadgeGhost17() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho G</p>
       </div>
     </div>
@@ -311,7 +311,7 @@ function Tags8() {
 function Frame4867() {
   return (
     <div className="content-stretch flex gap-2 items-center justify-start relative shrink-0 w-[259px]">
-      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#0f4c50] text-[24px] text-nowrap">
+      <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold leading-[0] relative shrink-0 text-textColorPrimary text-[24px] text-nowrap">
         <p className="leading-[1.5] whitespace-pre">Avelã</p>
       </div>
       <Tags8 />
@@ -365,7 +365,7 @@ function Frame4889() {
 
 function Ticket8() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
+    <div className="bg-tertiary box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-lg shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80" data-name="ticket">
       <Frame4867 />
       <Frame4889 />
     </div>
@@ -376,14 +376,14 @@ function Kanban2() {
   return (
     <div className="bg-[#ffffff] relative rounded-2xl shrink-0" data-name="Kanban">
       <div className="box-border content-stretch flex flex-col gap-4 items-center justify-start overflow-clip p-[24px] relative">
-        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-[#0f4c50] text-[37px]" style={{ width: "min-content" }}>
+        <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] min-w-full relative shrink-0 text-textColorPrimary text-[37px]" style={{ width: "min-content" }}>
           <p className="leading-[44px]">Lanches</p>
         </div>
         {[...Array(4).keys()].map((_, i) => (
           <Ticket8 key={i} />
         ))}
       </div>
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-2xl" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-2xl" />
     </div>
   );
 }
@@ -442,22 +442,22 @@ function Frame2() {
       <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#fbfbfb] w-3.5">
         <p className="leading-[normal]">1</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">2</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">3</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">4</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">5</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">6</p>
       </div>
-      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-[#0f4c50] w-3.5">
+      <div className="flex flex-col h-[13px] justify-end relative shrink-0 text-textColorPrimary w-3.5">
         <p className="leading-[normal]">7</p>
       </div>
     </div>
@@ -532,7 +532,7 @@ function Frame35() {
 function LeftSide8Column() {
   return (
     <div className="basis-0 box-border content-stretch flex flex-col gap-[25px] grow items-center justify-start min-h-px min-w-px px-0 py-[50px] relative shrink-0 w-full" data-name="Left side 8 Column">
-      <div className="font-['Retrokia:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#0f4c50] text-[64px] text-nowrap tracking-[-1.28px]">
+      <div className="font-['PrimaryFont:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-textColorPrimary text-[64px] text-nowrap tracking-[-1.28px]">
         <p className="leading-[1.5] whitespace-pre">Cardapio</p>
       </div>
       <Frame4859 />

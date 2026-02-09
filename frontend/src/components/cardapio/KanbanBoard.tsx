@@ -57,12 +57,12 @@ function BadgeOption({
     <button
       onClick={onClick}
       className={`box-border content-stretch flex gap-2.5 items-center justify-center px-4 py-2.5 relative rounded-[4px] shrink-0 transition-all hover:opacity-80 ${
-        isSelected ? 'bg-[#0f4c50]' : 'bg-transparent'
+        isSelected ? 'bg-primary' : 'bg-transparent'
       }`}
     >
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[4px]" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[4px]" />
       <div className={`font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[14px] text-nowrap ${
-        isSelected ? 'text-white' : 'text-[#0f4c50]'
+        isSelected ? 'text-white' : 'text-textColorPrimary'
       }`}>
         <p className="leading-[1.4] whitespace-pre">{children}</p>
       </div>
@@ -83,12 +83,12 @@ function SizeOption({
     <button
       onClick={onClick}
       className={`box-border content-stretch flex gap-2.5 items-center justify-center px-4 py-2.5 relative rounded-[4px] shrink-0 transition-all hover:opacity-80 ${
-        isSelected ? 'bg-[#0f4c50]' : 'bg-transparent'
+        isSelected ? 'bg-primary' : 'bg-transparent'
       }`}
     >
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[4px]" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[4px]" />
       <div className={`font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[14px] text-nowrap ${
-        isSelected ? 'text-white' : 'text-[#0f4c50]'
+        isSelected ? 'text-white' : 'text-textColorPrimary'
       }`}>
         <p className="leading-[1.4] whitespace-pre">Tamanho {size}</p>
       </div>
@@ -325,7 +325,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#f9f8f5] !max-w-[1200px] min-h-[700px] w-[1200px] max-h-[90vh] overflow-y-auto">
         <DialogHeader className="pb-6">
-          <DialogTitle className="font-['Retrokia:Demo',_sans-serif] text-[#0f4c50] text-[24px]">
+          <DialogTitle className="font-['PrimaryFont:Demo',_sans-serif] text-textColorPrimary text-[24px]">
             {product ? 'Editar Produto' : 'Novo Produto'}
           </DialogTitle>
           <DialogDescription className="font-['Rethink_Sans:Regular',_sans-serif] text-[#797474] text-[14px]">
@@ -509,8 +509,8 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
                       {formData.selectedSizes.map(size => (
                         <div key={size} className="content-stretch flex gap-4 items-center justify-start relative shrink-0 w-full">
                           <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-3 py-2 relative rounded-[2px] shrink-0 w-[110px]">
-                            <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
-                            <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+                            <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
+                            <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
                               <p className="leading-[1.4] whitespace-pre">Tamanho {size}</p>
                             </div>
                           </div>
@@ -554,7 +554,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
                     <div className="box-border content-stretch flex flex-col gap-4 items-start justify-center relative shrink-0 w-full">
                       {formData.customOptions.map(option => (
                         <div key={option.id} className="box-border content-stretch flex flex-col gap-3 items-start justify-start px-3 py-3 relative rounded-[2px] shrink-0 w-full">
-                          <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[2px]" />
+                          <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[2px]" />
                           
                           {/* Primeira linha: Nome e controle de quantidade */}
                           <div className="content-stretch flex gap-4 items-center justify-start relative shrink-0 w-full">
@@ -562,7 +562,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
                               type="text"
                               value={option.name}
                               onChange={(e) => updateCustomOption(option.id, 'name', e.target.value)}
-                              className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] bg-transparent border-none outline-none text-[#0f4c50] text-[14px] flex-1"
+                              className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] bg-transparent border-none outline-none text-textColorPrimary text-[14px] flex-1"
                               placeholder="Nome da opção"
                             />
                             <QuantityControl
@@ -588,7 +588,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
                               type="text"
                               value={option.price}
                               onChange={(e) => updateCustomOption(option.id, 'price', e.target.value)}
-                              className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] bg-transparent border border-[#d9d9d9] rounded-[4px] px-3 py-1.5 outline-none text-[#0f4c50] text-[14px] flex-1"
+                              className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] bg-transparent border border-[#d9d9d9] rounded-[4px] px-3 py-1.5 outline-none text-textColorPrimary text-[14px] flex-1"
                               placeholder="0,00"
                             />
                           </div>
@@ -625,7 +625,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
         <div className="flex justify-center pt-8 pb-4 px-6">
           <button
             onClick={handleSave}
-            className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-center px-[60px] py-5 relative rounded-[50px] shrink-0 hover:bg-[#0d4247] transition-colors min-w-[280px]"
+            className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-center px-[60px] py-5 relative rounded-[50px] shrink-0 hover:bg-primaryHover transition-colors min-w-[280px]"
           >
             <div className="flex flex-col font-['Roboto:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[18px] text-center text-nowrap text-white tracking-[0.2px]" style={{ fontVariationSettings: "'wdth' 100" }}>
               <p className="leading-none whitespace-pre">Finalizar cadastro</p>
@@ -637,7 +637,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
             <div className="fixed inset-0 z-[100] flex items-center justify-center">
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative bg-white rounded-lg shadow-xl w-[90vw] max-w-[520px] p-4">
-                <h3 className="text-[#0f4c50] font-semibold mb-3">Ajuste a imagem (1:1)</h3>
+                <h3 className="text-textColorPrimary font-semibold mb-3">Ajuste a imagem (1:1)</h3>
 
                 <div className="relative w-full h-[320px] bg-[#f0f0f0] rounded-md overflow-hidden">
                   <Cropper
@@ -693,7 +693,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
                       setZoom(1);
                       setCrop({ x: 0, y: 0 });
                     }}
-                    className="px-4 py-2 rounded-md bg-[#0f4c50] hover:bg-[#0d4247] text-white"
+                    className="px-4 py-2 rounded-md bg-primary hover:bg-primaryHover text-white"
                   >
                     Cortar
                   </button>
@@ -892,7 +892,7 @@ export function KanbanBoard() {
         <div className="content-stretch flex gap-[15px] items-start justify-start relative shrink-0">
           <button
             onClick={handleExport}
-            className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[50px] shrink-0 hover:bg-[#0d4247] transition-colors"
+            className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[50px] shrink-0 hover:bg-primaryHover transition-colors"
           >
             <div className="flex flex-col font-['Roboto:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[18px] text-center text-nowrap text-white tracking-[0.2px]" style={{ fontVariationSettings: "'wdth' 100" }}>
               <p className="leading-none whitespace-pre">Exportar</p>
@@ -902,7 +902,7 @@ export function KanbanBoard() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[50px] shrink-0 hover:bg-[#0d4247] transition-colors">
+              <button className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[50px] shrink-0 hover:bg-primaryHover transition-colors">
                 <div className="flex flex-col font-['Roboto:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[18px] text-center text-nowrap text-white tracking-[0.2px]" style={{ fontVariationSettings: "'wdth' 100" }}>
                   <p className="leading-none whitespace-pre">Adicionar</p>
                 </div>
@@ -962,7 +962,7 @@ export function KanbanBoard() {
         <Dialog open={isCategoryModalOpen} onOpenChange={setIsCategoryModalOpen}>
           <DialogContent className="bg-[#f9f8f5] max-w-[500px]">
             <DialogHeader>
-              <DialogTitle className="font-['Retrokia:Demo',_sans-serif] text-[#0f4c50] text-[24px]">
+              <DialogTitle className="font-['PrimaryFont:Demo',_sans-serif] text-textColorPrimary text-[24px]">
                 Nova Categoria
               </DialogTitle>
               <DialogDescription className="font-['Rethink_Sans:Regular',_sans-serif] text-[#797474] text-[14px]">
@@ -987,13 +987,13 @@ export function KanbanBoard() {
               <div className="flex gap-3 justify-end pt-4">
                 <button
                   onClick={handleCancelCategory}
-                  className="px-6 py-2 border border-[#0f4c50] text-[#0f4c50] rounded-[50px] hover:bg-[#0f4c50] hover:text-white transition-colors"
+                  className="px-6 py-2 border border-primary text-textColorPrimary rounded-[50px] hover:bg-primaryHover hover:text-white transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={handleSaveCategory}
-                  className="px-6 py-2 bg-[#0f4c50] text-white rounded-[50px] hover:bg-[#0d4247] transition-colors"
+                  className="px-6 py-2 bg-primary text-white rounded-[50px] hover:bg-primaryHover transition-colors"
                 >
                   Criar categoria
                 </button>
@@ -1006,7 +1006,7 @@ export function KanbanBoard() {
         <Dialog open={isEditCategoryModalOpen} onOpenChange={setIsEditCategoryModalOpen}>
           <DialogContent className="bg-[#f9f8f5] max-w-[500px]">
             <DialogHeader>
-              <DialogTitle className="font-['Retrokia:Demo',_sans-serif] text-[#0f4c50] text-[24px]">
+              <DialogTitle className="font-['PrimaryFont:Demo',_sans-serif] text-textColorPrimary text-[24px]">
                 Editar Categoria
               </DialogTitle>
               <DialogDescription className="font-['Rethink_Sans:Regular',_sans-serif] text-[#797474] text-[14px]">
@@ -1031,13 +1031,13 @@ export function KanbanBoard() {
               <div className="flex gap-3 justify-end pt-4">
                 <button
                   onClick={handleCancelEditCategory}
-                  className="px-6 py-2 border border-[#0f4c50] text-[#0f4c50] rounded-[50px] hover:bg-[#0f4c50] hover:text-white transition-colors"
+                  className="px-6 py-2 border border-primary text-textColorPrimary rounded-[50px] hover:bg-primaryHover hover:text-white transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={handleSaveEditCategory}
-                  className="px-6 py-2 bg-[#0f4c50] text-white rounded-[50px] hover:bg-[#0d4247] transition-colors"
+                  className="px-6 py-2 bg-primary text-white rounded-[50px] hover:bg-primaryHover transition-colors"
                 >
                   Salvar alterações
                 </button>

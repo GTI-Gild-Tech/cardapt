@@ -1,4 +1,4 @@
-import imgBackground from "./../../assets/Background.png";
+import imgBackground from "./../../assets/pexels-rachel-claire-5865147.png";
 import { motion } from "framer-motion";
 import { Navigation } from "./Navigation";
 import { CoffeeIllustration } from "./CoffeeIllustration";
@@ -20,7 +20,7 @@ export function Home({ onOpenCart }: HomeProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div
-        className="relative bg-cover bg-center min-h-[100vh] justify-center align-center flex flex-col pt-20"
+        className="relative bg-cover bg-center  min-h-[100vh] justify-center align-center flex flex-col pt-20"
         style={{ backgroundImage: `url('${imgBackground}')` }}
       >
         <div className="relative mx-auto max-w-[1129px] px-4">
@@ -37,15 +37,15 @@ export function Home({ onOpenCart }: HomeProps) {
               transition={{ duration: 2, repeat: Infinity }}
               className="flex justify-center"
             >
-              <div className="w-6 h-10 border-2 border-[#E4DDCD] rounded-full flex justify-center">
-                <div className="w-1 h-3 bg-[#c1a07b] rounded-full mt-2"></div>
+              <div className="w-6 h-10 border-2 border-secondary rounded-full flex justify-center">
+                <div className="w-1 h-3 bg-quaternary rounded-full mt-2"></div>
               </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="flex justify-center pt-1 text-[#E4DDCD]"
+              className="flex justify-center pt-1 text-quaternary"
             >
               Veja mais
             </motion.div>

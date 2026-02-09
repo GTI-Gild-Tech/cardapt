@@ -81,7 +81,7 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
          
           <div className="flex items-center justify-between">
             <motion.div 
-              className="font-['Rethink_Sans:ExtraBold',sans-serif] font-extrabold text-[42px] text-[#0f4c50]"
+              className="font-['Rethink_Sans:ExtraBold',sans-serif] font-extrabold text-[42px] text-textColorPrimary"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -105,17 +105,17 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
                   </Button>
                 </motion.div>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-[#f0eee9] border-[#0f4c50]">
+              <AlertDialogContent className="bg-[#f0eee9] border-primary">
                 <AlertDialogHeader>
-                  <AlertDialogTitle className="text-[#0f4c50] font-['Rethink_Sans:Bold',sans-serif]">
+                  <AlertDialogTitle className="text-textColorPrimary font-['Rethink_Sans:Bold',sans-serif]">
                     Apagar carrinho?
                   </AlertDialogTitle>
-                  <AlertDialogDescription className="text-[#0f4c50] font-['Rethink_Sans:Regular',sans-serif]">
+                  <AlertDialogDescription className="text-textColorPrimary font-['Rethink_Sans:Regular',sans-serif]">
                     Tem certeza que deseja apagar o seu carrinho? Esta ação não pode ser desfeita.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-white text-[#0f4c50] border-[#0f4c50] hover:bg-gray-50 font-['Rethink_Sans:Medium',sans-serif]">
+                  <AlertDialogCancel className="bg-white text-textColorPrimary border-primary hover:bg-gray-50 font-['Rethink_Sans:Medium',sans-serif]">
                     Cancelar
                   </AlertDialogCancel>
                   <AlertDialogAction 
@@ -124,7 +124,7 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
                       onClose();
                       setIsConfirmDialogOpen(false);
                     }}
-                    className="bg-[#0f4c50] text-white hover:bg-[#0a3c3f] font-['Rethink_Sans:Medium',sans-serif]"
+                    className="bg-primary text-white hover:bg-primaryHover font-['Rethink_Sans:Medium',sans-serif]"
                   >
                     Sim, apagar
                   </AlertDialogAction>
@@ -179,10 +179,10 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
                     </h3>
                     <div className="flex gap-4 font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[18px] text-[#797474]">
                       <span>
-                        <span className="text-[#0f4c50]">P</span> {formatPrice(item.priceP)}
+                        <span className="text-textColorPrimary">P</span> {formatPrice(item.priceP)}
                       </span>
                       <span>
-                        <span className="text-[#0f4c50]">M</span> {formatPrice(item.priceM)}
+                        <span className="text-textColorPrimary">M</span> {formatPrice(item.priceM)}
                       </span>
                     </div>
                   </div>
@@ -194,14 +194,14 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
                       <div className="flex gap-2">
                         <div className={`w-[35px] h-[35px] rounded-[10px] flex items-center justify-center font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[20px] border ${
                           item.size === 'P' 
-                            ? 'bg-[#0f4c50] text-white border-[#0f4c50]' 
+                            ? 'bg-primary text-white border-primary' 
                             : 'bg-white text-[#797474] border-[#d9d9d9]'
                         }`}>
                           P
                         </div>
                         <div className={`w-[35px] h-[35px] rounded-[10px] flex items-center justify-center font-['Rethink_Sans:Regular',_sans-serif] font-normal text-[20px] border ${
                           item.size === 'M' 
-                            ? 'bg-[#0f4c50] text-white border-[#0f4c50]' 
+                            ? 'bg-primary text-white border-primary' 
                             : 'bg-white text-[#797474] border-[#d9d9d9]'
                         }`}>
                           M
@@ -305,7 +305,7 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
               {/* Continue Order Button */}
               <motion.button
                 onClick={onContinueOrder}  
-                className="absolute left-0 bottom-0 w-[539px] h-[83px] bg-[#0f4c50] rounded-[43px] flex items-center justify-between px-[25px] py-[13px]"
+                className="absolute left-0 bottom-0 w-[539px] h-[83px] bg-primary rounded-[43px] flex items-center justify-between px-[25px] py-[13px]"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}

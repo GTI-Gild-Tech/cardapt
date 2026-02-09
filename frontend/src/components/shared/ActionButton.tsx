@@ -35,17 +35,17 @@ export function ActionButton({
     <div
       className={`content-stretch flex gap-[52px] h-[23px] items-center justify-center relative rounded-[43px] shrink-0 w-[125px] cursor-pointer transition-colors ${
         isToggle && isToggled
-          ? "bg-[#C1A07B] hover:bg-[#b8956e]"
+          ? "bg-secondary hover:bg-secondaryHover"
           : isOutline
-          ? "hover:bg-[#0f4c50] hover:text-white"
-          : "bg-[#0f4c50] hover:bg-[#0d4247]"
+          ? "hover:bg-primaryHover hover:text-white"
+          : "bg-primary hover:bg-primaryHover"
       }`}
       onClick={handleClick}
     >
       {isOutline && (
         <div
           aria-hidden="true"
-          className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[43px]"
+          className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[43px]"
         />
       )}
       <div className="content-stretch flex gap-[9px] h-0 items-center justify-center relative shrink-0">
@@ -54,7 +54,7 @@ export function ActionButton({
             isToggle && isToggled
               ? "text-[#ffffff]"
               : isOutline 
-              ? "text-[#0f4c50]" 
+              ? "text-textColorPrimary" 
               : "text-[#ffffff]"
           }`}
         >

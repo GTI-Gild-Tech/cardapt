@@ -149,7 +149,7 @@ export function Autocomplete({ options, value, onChange, placeholder = "Digite p
               key={option.value}
               className={`px-3 py-2 text-[13px] font-['Open_Sans:Regular',_sans-serif] font-normal cursor-pointer border-b border-[#e0e0e0] last:border-b-0 transition-colors ${
                 index === highlightedIndex
-                  ? "bg-[#e4ddcd] text-[#0f4c50]"
+                  ? "bg-tertiary text-textColorPrimary"
                   : "text-[#000000] hover:bg-[#f5f5f5]"
               }`}
               onClick={() => handleOptionClick(option)}

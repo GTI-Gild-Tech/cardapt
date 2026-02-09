@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Product } from "../cardapio/KanbanComponents";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useProducts } from "../context/ProductsContext";
-import backgroundImage from "../../assets/bg-home.svg";
 import { useRef } from "react";
 
 // ⚠️ IMPORT CORRETO: default export do modal
@@ -64,23 +63,24 @@ function MenuProductCard({ product }: MenuProductCardProps) {
         />
       </div>
 
-      {/* Nome */}
-      <h3 className="font-semibold text-[#0f4c50] text-[20px]">{product.name}</h3>
+      <div className="flex flex-col justify-between grow">
+        {/* Nome */}
+        <h3 className="font-semibold text-textColorPrimary text-[20px]">{product.name}</h3>
 
-      {/* Preços */}
-      <p className="text-[#2f1b04] text-[14px]">{formatPrices()}</p>
+        {/* Preços */}
+        <p className="text-[#2f1b04] text-[14px]">{formatPrices()}</p>
 
-      {/* Descrição — aparece só na impressão */}
-      {product.description?.trim() ? (
-        <p className="show-on-print text-[12px] text-gray-700 mt-1" style={{ display: "none" }}>
-          {product.description}
-        </p>
-      ) : null}
-
+        {/* Descrição — aparece só na impressão */}
+        {product.description?.trim() ? (
+          <p className="show-on-print text-[12px] text-gray-700 mt-1" style={{ display: "none" }}>
+            {product.description}
+          </p>
+        ) : null}
+      </div>
       {/* Botão — escondido na impressão */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="hide-on-print bg-[#0f4c50] px-6 py-3 rounded-[8px] w-full text-white hover:bg-[#0d4247] transition-colors"
+        className="hide-on-print bg-primary px-6 py-3 rounded-[8px] w-full text-white hover:bg-primaryHover transition-colors"
       >
         Fazer Pedido
       </button>
@@ -104,7 +104,7 @@ function MenuCategory({ title, products }: MenuCategoryProps) {
   return (
     <div id="homeForPrint" className="content-stretch flex flex-col gap-6 items-start justify-start relative shrink-0 w-full">
       {/* Título da categoria */}
-      <div className="font-[Retrokia] font-bold leading-[0] relative shrink-0 text-[#0f4c50] text-[32px]">
+      <div className="font-[PrimaryFont] font-bold leading-[0] relative shrink-0 text-textColorPrimary text-[32px]">
         <p className="leading-[1.2]">{title}</p>
       </div>
 
@@ -139,9 +139,6 @@ export function HomeContent() {
     <div id="homeForprint" className="pt-10">
       <style>{`
           #homeForprint{
-            background-image: url(${backgroundImage});
-            background-repeat: repeat;
-            background-position: start;
           };
           @media print {
             .hide-on-print { display: none !important; }
@@ -156,8 +153,8 @@ export function HomeContent() {
         `}</style>
       <div className="basis-0 box-border content-stretch flex flex-col gap-8 grow items-center justify-start min-h-px min-w-px px-8 py-[50px] relative shrink-0 w-full">
         {/* Título principal */}
-        <div className="font-['Retrokia:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#0f4c50] md:text-5xl text-3xl text-center tracking-[-1.28px]">
-          <p className="leading-[1.3] whitespace-pre font-[Retrokia] ">
+        <div className="font-['PrimaryFont:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-textColorPrimary md:text-5xl text-3xl text-center tracking-[-1.28px]">
+          <p className="leading-[1.3] whitespace-pre font-[PrimaryFont] ">
             Nosso Cardapio
           </p>
         </div>
@@ -177,8 +174,8 @@ export function HomeContent() {
             onClick={() => setSelectedCategory("todos")}
             className={`box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[25px] shrink-0 transition-all hover:opacity-80 ${
               selectedCategory === "todos"
-                ? "bg-[#0f4c50] text-white"
-                : "bg-transparent border border-[#0f4c50] text-[#0f4c50]"
+                ? "bg-primary text-white"
+                : "bg-transparent border border-primary text-textColorPrimary"
             }`}
           >
             <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[14px] text-nowrap">
@@ -192,8 +189,8 @@ export function HomeContent() {
               onClick={() => setSelectedCategory(category)}
               className={`box-border content-stretch flex gap-2.5 items-center justify-center px-6 py-3 relative rounded-[25px] shrink-0 transition-all hover:opacity-80 ${
                 selectedCategory === category
-                  ? "bg-[#0f4c50] text-white"
-                  : "bg-transparent border border-[#0f4c50] text-[#0f4c50]"
+                  ? "bg-primary text-white"
+                  : "bg-transparent border border-primary text-textColorPrimary"
               }`}
             >
               <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[14px] text-nowrap">
@@ -225,7 +222,7 @@ export function HomeContent() {
           onClick={handlePrint}
           aria-label="Imprimir"
           title="Imprimir"
-          className="hide-on-print hidden md:flex fixed right-4 bottom-4 z-50 items-center justify-center p-2 rounded-full bg-[#0f4c50] text-white shadow-md hover:bg-[#0d4247] focus:outline-none"
+          className="hide-on-print hidden md:flex fixed right-4 bottom-4 z-50 items-center justify-center p-2 rounded-full bg-primary text-white shadow-md hover:bg-primaryHover focus:outline-none"
         >
           <Printer className="w-5 h-5" />
         </button>

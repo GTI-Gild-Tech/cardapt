@@ -111,11 +111,11 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
       {/* drawer */}
       <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
         <header className="flex items-center justify-between p-4 border-b border-stone-300">
-          <h2 className="text-lg font-semibold text-[#0f4c50]">
+          <h2 className="text-lg font-semibold text-textColorPrimary">
             {step === "cart" ? "Seu Carrinho" : "Dados do Cliente"}
           </h2>
           <button onClick={onClose} aria-label="Fechar">
-            <X className="h-6 w-6 text-[#0f4c50]  hover:text-[#0f4c50]/80" />
+            <X className="h-6 w-6 text-textColorPrimary  hover:text-textColorPrimary/80" />
           </button>
         </header>
 
@@ -128,9 +128,9 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
             ) : (
               <ul className="space-y-3">
                 {cartItems.map((it, idx) => (
-                  <li key={idx} className="flex justify-between rounded border border-[#c1a07b] p-3">
+                  <li key={idx} className="flex justify-between rounded border border-secondary p-3">
                     <div>
-                      <div className="font-medium text-[#0f4c50]">
+                      <div className="font-medium text-textColorPrimary">
                         {it.name} {it.size ? `(${it.size})` : ""}
                       </div>
                       <div className="text-sm text-gray-600">
@@ -153,7 +153,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
           ) : (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[#0f4c50]">
+                <label className="block text-sm font-medium text-textColorPrimary">
                   Nome do cliente
                 </label>
                 <input
@@ -165,7 +165,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#0f4c50]">
+                <label className="block text-sm font-medium text-textColorPrimary">
                   Mesa / Retirada / Delivery
                 </label>
                 <input
@@ -184,7 +184,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
             <div className="flex-col space-y-2">
             
                 <p className=" py-3 text-xl text-center text-gray-700">Subtotal:{" "}
-                <strong className="text-[#0f4c50]">
+                <strong className="text-textColorPrimary">
                   {formatBRL(subtotalCents)}
                 </strong></p>
 
@@ -197,7 +197,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
                 
                 <button
                   className={
-                    `rounded w-full bg-[#0f4c50] px-4 py-2 font-medium text-white hover:bg-[#0d4247] ` +
+                    `rounded w-full bg-primary px-4 py-2 font-medium text-white hover:bg-primaryHover ` +
                     (!canContinue ? 'opacity-50 cursor-not-allowed' : '')
                   }
                   onClick={goToDetails}
@@ -215,7 +215,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
                 Voltar
               </button>
               <button
-                className="rounded w-full bg-[#0f4c50] px-4 py-2 font-medium text-white hover:bg-[#0d4247] disabled:opacity-50"
+                className="rounded w-full bg-primary px-4 py-2 font-medium text-white hover:bg-primaryHover disabled:opacity-50"
                 onClick={handleFinish}
                 disabled={!canFinish || saving}
               >

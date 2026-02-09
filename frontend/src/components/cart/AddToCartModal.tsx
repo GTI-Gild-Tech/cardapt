@@ -114,7 +114,7 @@ export default function AddToCartModal({ isOpen, product, onClose }: Props) {
       {/* card */}
       <div className="relative z-10 w-full max-w-md rounded-lg bg-white p-5 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-[#0f4c50]">{product.name}</h3>
+          <h3 className="text-lg font-bold text-textColorPrimary">{product.name}</h3>
           <button type="button" onClick={onClose} aria-label="Fechar">
             <X className="h-6 w-6 text-gray-600" />
           </button>
@@ -191,7 +191,7 @@ export default function AddToCartModal({ isOpen, product, onClose }: Props) {
         <button
             type="button"
             onClick={handleAdd}
-            className="flex-1 rounded-lg bg-[#0f4c50] px-4 py-2 font-medium text-white hover:bg-[#0d4247]"
+            className="flex-1 rounded-lg bg-primary px-4 py-2 font-medium text-white hover:bg-primaryHover"
           >
             Adicionar • {formatBRL(subtotalCents)}
           </button>

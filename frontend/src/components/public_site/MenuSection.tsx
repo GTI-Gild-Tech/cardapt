@@ -20,7 +20,7 @@ export function MenuSection({ title, items, onAddToCart }: MenuSectionProps) {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <motion.h2 
-          className="font-['Retrokia:Demo',sans-serif] text-[64px] text-[#0f4c50]"
+          className="font-['PrimaryFont:Demo',sans-serif] text-[64px] text-textColorPrimary"
           whileHover={{ scale: 1.02, x: 10 }}
           transition={{ duration: 0.3 }}
         >

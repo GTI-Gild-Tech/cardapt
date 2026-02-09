@@ -1,6 +1,6 @@
 function Frame3() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Pedidos</p>
@@ -11,7 +11,7 @@ function Frame3() {
 
 function Frame6() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Fidelidade</p>
@@ -22,7 +22,7 @@ function Frame6() {
 
 function Frame5() {
   return (
-    <div className="bg-[#e4ddcd] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-tertiary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-start px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(138,107,71,0.2)]" />
       <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#000000] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cardápio</p>
@@ -33,7 +33,7 @@ function Frame5() {
 
 function Frame4() {
   return (
-    <div className="bg-[#c1a07b] box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
+    <div className="bg-secondary box-border content-stretch flex gap-2.5 h-[41px] items-center justify-center px-5 py-2.5 relative rounded-[30px] shrink-0">
       <div aria-hidden="true" className="absolute border-[0px_1px_1px_0px] border-[rgba(0,0,0,0.18)] border-solid inset-0 pointer-events-none rounded-[30px] shadow-[2px_2px_2px_0px_rgba(115,82,46,0.3)]" />
       <div className="flex flex-col font-['Rethink_Sans:Bold',_sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[#ffffff] text-[24px] text-center text-nowrap">
         <p className="leading-[40px] whitespace-pre">Cadastro</p>
@@ -119,8 +119,8 @@ function Frame4880() {
 function BadgeGhost() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">{`Tamanho `}</p>
       </div>
     </div>
@@ -130,8 +130,8 @@ function BadgeGhost() {
 function BadgeGhost1() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Quantidade</p>
       </div>
     </div>
@@ -161,8 +161,8 @@ function Frame4879() {
 function BadgeGhost2() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho P</p>
       </div>
     </div>
@@ -172,8 +172,8 @@ function BadgeGhost2() {
 function BadgeGhost3() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho M</p>
       </div>
     </div>
@@ -183,8 +183,8 @@ function BadgeGhost3() {
 function BadgeGhost4() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho G</p>
       </div>
     </div>
@@ -215,8 +215,8 @@ function Frame4886() {
 function BadgeGhost5() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0 w-[92px]" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho P</p>
       </div>
     </div>
@@ -237,8 +237,8 @@ function Frame4882() {
 function BadgeGhost6() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho M</p>
       </div>
     </div>
@@ -259,8 +259,8 @@ function Frame4883() {
 function BadgeGhost7() {
   return (
     <div className="box-border content-stretch flex gap-2.5 items-center justify-start px-2 py-0.5 relative rounded-sm shrink-0" data-name="badge ghost">
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-sm" />
-      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#0f4c50] text-[14px] text-nowrap">
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-sm" />
+      <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal leading-[0] relative shrink-0 text-textColorPrimary text-[14px] text-nowrap">
         <p className="leading-[1.4] whitespace-pre">Tamanho G</p>
       </div>
     </div>
@@ -328,7 +328,7 @@ function Frame4875() {
 
 function MainButton() {
   return (
-    <div className="bg-[#0f4c50] box-border content-stretch flex gap-2.5 items-center justify-start px-[273px] py-4 relative rounded-[50px] shrink-0" data-name="Main Button">
+    <div className="bg-primary box-border content-stretch flex gap-2.5 items-center justify-start px-[273px] py-4 relative rounded-[50px] shrink-0" data-name="Main Button">
       <div className="flex flex-col font-['Roboto:Regular',_sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#ffffff] text-[20px] text-center text-nowrap tracking-[0.2px]" style={{ fontVariationSettings: "'wdth' 100" }}>
         <p className="leading-none whitespace-pre">Finalizar cadastro</p>
       </div>
@@ -348,7 +348,7 @@ function Frame4859() {
 function LeftSide8Column() {
   return (
     <div className="basis-0 box-border content-stretch flex flex-col gap-[25px] grow items-center justify-start min-h-px min-w-px px-0 py-[50px] relative shrink-0 w-full" data-name="Left side 8 Column">
-      <div className="font-['Retrokia:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#0f4c50] text-[64px] text-nowrap tracking-[-1.28px]">
+      <div className="font-['PrimaryFont:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-textColorPrimary text-[64px] text-nowrap tracking-[-1.28px]">
         <p className="leading-[1.5] whitespace-pre">Cadastro</p>
       </div>
       <Frame4859 />

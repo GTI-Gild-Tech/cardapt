@@ -13,19 +13,19 @@ function Frame4780() {
     <div className="font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[23px] leading-[0] relative shrink-0 text-[#797474] text-[18px] w-[272px]">
       <div className="absolute left-0 top-0 w-[74px]">
         <p className="leading-[normal]">
-          <span className="text-[#0f4c50]">P</span>
+          <span className="text-textColorPrimary">P</span>
           <span>{` R$8,00`}</span>
         </p>
       </div>
       <div className="absolute left-[82px] top-0 w-[91px]">
         <p className="leading-[normal]">
-          <span className="text-[#0f4c50]">M</span>
+          <span className="text-textColorPrimary">M</span>
           <span>{` R$12,00`}</span>
         </p>
       </div>
       <div className="absolute left-[181px] top-0 w-[91px]">
         <p className="leading-[normal]">
-          <span className="text-[#0f4c50]">G</span>
+          <span className="text-textColorPrimary">G</span>
           <span>{` R$18,00`}</span>
         </p>
       </div>
@@ -60,9 +60,9 @@ function Frame9() {
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
       <div
         aria-hidden="true"
-        className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[10px]"
+        className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[10px]"
       />
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -74,9 +74,9 @@ function Frame7() {
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
       <div
         aria-hidden="true"
-        className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[10px]"
+        className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[10px]"
       />
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -88,9 +88,9 @@ function Frame8() {
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-[10px] shrink-0 size-[35px]">
       <div
         aria-hidden="true"
-        className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[10px]"
+        className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[10px]"
       />
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">G</p>
       </div>
     </div>

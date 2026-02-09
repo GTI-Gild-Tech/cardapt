@@ -28,7 +28,7 @@ function Frame1() {
 function Navbar() {
   return (
     <div
-      className="absolute bg-[#c1a07b] box-border content-stretch flex flex-row gap-5 items-start justify-start left-1/2 px-[200px] py-10 rounded-bl-[50px] rounded-br-[50px] top-[-550px] translate-x-[-50%]"
+      className="absolute bg-secondary box-border content-stretch flex flex-row gap-5 items-start justify-start left-1/2 px-[200px] py-10 rounded-bl-[50px] rounded-br-[50px] top-[-550px] translate-x-[-50%]"
       data-name="Navbar"
     >
       <Frame />
@@ -115,7 +115,7 @@ function Frame4778() {
 function Frame8() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -125,7 +125,7 @@ function Frame8() {
 function Frame7() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -258,7 +258,7 @@ function Frame4786() {
 function Frame12() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -268,7 +268,7 @@ function Frame12() {
 function Frame15() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -401,7 +401,7 @@ function Frame4791() {
 function Frame35() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -411,7 +411,7 @@ function Frame35() {
 function Frame36() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -544,7 +544,7 @@ function Frame4794() {
 function Frame43() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -554,7 +554,7 @@ function Frame43() {
 function Frame44() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -687,7 +687,7 @@ function Frame4797() {
 function Frame51() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -697,7 +697,7 @@ function Frame51() {
 function Frame52() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -830,7 +830,7 @@ function Frame4800() {
 function Frame59() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -840,7 +840,7 @@ function Frame59() {
 function Frame60() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -973,7 +973,7 @@ function Frame4803() {
 function Frame67() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -983,7 +983,7 @@ function Frame67() {
 function Frame68() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1116,7 +1116,7 @@ function Frame4806() {
 function Frame75() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1126,7 +1126,7 @@ function Frame75() {
 function Frame76() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1240,7 +1240,7 @@ function Frame13() {
       <Frame32 />
       <Frame31 />
       <Frame33 />
-      <div className="absolute flex flex-col font-['Retrokia:Demo',_sans-serif] justify-center leading-[0] left-px not-italic text-[#0f4c50] text-[64px] text-left text-nowrap top-[87px] translate-y-[-50%]">
+      <div className="absolute flex flex-col font-['PrimaryFont:Demo',_sans-serif] justify-center leading-[0] left-px not-italic text-textColorPrimary text-[64px] text-left text-nowrap top-[87px] translate-y-[-50%]">
         <p className="block leading-[0px] whitespace-pre">Cappuccinos</p>
       </div>
     </div>
@@ -1277,7 +1277,7 @@ function Frame4809() {
 function Frame83() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1287,7 +1287,7 @@ function Frame83() {
 function Frame84() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1420,7 +1420,7 @@ function Frame4812() {
 function Frame91() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1430,7 +1430,7 @@ function Frame91() {
 function Frame92() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1563,7 +1563,7 @@ function Frame4815() {
 function Frame99() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1573,7 +1573,7 @@ function Frame99() {
 function Frame100() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1706,7 +1706,7 @@ function Frame4818() {
 function Frame107() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1716,7 +1716,7 @@ function Frame107() {
 function Frame108() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1849,7 +1849,7 @@ function Frame4821() {
 function Frame115() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -1859,7 +1859,7 @@ function Frame115() {
 function Frame116() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -1992,7 +1992,7 @@ function Frame4824() {
 function Frame123() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -2002,7 +2002,7 @@ function Frame123() {
 function Frame124() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -2135,7 +2135,7 @@ function Frame4827() {
 function Frame131() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -2145,7 +2145,7 @@ function Frame131() {
 function Frame132() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -2278,7 +2278,7 @@ function Frame4830() {
 function Frame140() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">P</p>
       </div>
     </div>
@@ -2288,7 +2288,7 @@ function Frame140() {
 function Frame141() {
   return (
     <div className="bg-[#ffffff] box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#0f4c50] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-textColorPrimary text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -2402,7 +2402,7 @@ function Frame14() {
       <Frame25 />
       <Frame139 />
       <Frame26 />
-      <div className="absolute flex flex-col font-['Retrokia:Demo',_sans-serif] justify-center leading-[0] left-px not-italic text-[#0f4c50] text-[64px] text-left text-nowrap top-[87px] translate-y-[-50%]">
+      <div className="absolute flex flex-col font-['PrimaryFont:Demo',_sans-serif] justify-center leading-[0] left-px not-italic text-textColorPrimary text-[64px] text-left text-nowrap top-[87px] translate-y-[-50%]">
         <p className="block leading-[0px] whitespace-pre">Lanches</p>
       </div>
     </div>
@@ -2566,7 +2566,7 @@ function Frame151() {
 
 function Frame4782() {
   return (
-    <div className="absolute bg-[#0f4c50] box-border content-stretch flex flex-row h-[83px] items-center justify-between left-0 px-[25px] py-[13px] rounded-[43px] top-[880px] w-[539px]">
+    <div className="absolute bg-primary box-border content-stretch flex flex-row h-[83px] items-center justify-between left-0 px-[25px] py-[13px] rounded-[43px] top-[880px] w-[539px]">
       <Frame4776 />
       <Frame151 />
     </div>
@@ -2592,7 +2592,7 @@ function Group4857() {
 function Group4852() {
   return (
     <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
-      <div className="[grid-area:1_/_1] font-['Rethink_Sans:ExtraBold',_sans-serif] font-extrabold ml-0 mt-0 relative text-[#0f4c50] text-[42px] text-left tracking-[0.396px] w-[343px]">
+      <div className="[grid-area:1_/_1] font-['Rethink_Sans:ExtraBold',_sans-serif] font-extrabold ml-0 mt-0 relative text-textColorPrimary text-[42px] text-left tracking-[0.396px] w-[343px]">
         <p className="adjustLetterSpacing block leading-[41px]">Meus dados</p>
       </div>
     </div>

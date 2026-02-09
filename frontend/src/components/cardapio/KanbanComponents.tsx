@@ -104,13 +104,13 @@ const formatPrices = () =>
   return (
     <div
       ref={ref}
-      className={`bg-[#e4ddcd] box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-[8px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80 cursor-move transition-all duration-200 ${
+      className={`bg-bgCardsKanban box-border content-stretch flex flex-col gap-2 items-start justify-start px-[15px] py-5 relative rounded-[8px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12),0px_16px_32px_0px_rgba(0,0,0,0.08)] shrink-0 w-80 cursor-move transition-all duration-200 ${
         isDragging ? 'opacity-50 rotate-1 scale-105' : 'hover:shadow-lg'
       }`}
     >
       {/* Product name */}
       <div className="content-stretch flex gap-2 items-center justify-start relative shrink-0 w-[259px]">
-        <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold relative shrink-0 text-[#0f4c50] text-[24px] w-full">
+        <div className="font-['Rethink_Sans:SemiBold',_sans-serif] font-semibold relative shrink-0 text-textColorPrimary text-[24px] w-full">
           <p className="leading-[1.5] line-clamp-2">{product.name}</p>
         </div>
       </div>
@@ -179,18 +179,18 @@ export function KanbanColumn({ title, category, products, onMove, onReorder, onE
     <div
       ref={drop}
       className={`bg-white relative rounded-[16px] shrink-0 transition-all duration-200 ${
-        isOver ? 'ring-2 ring-[#0f4c50] ring-opacity-50' : ''
+        isOver ? 'ring-2 ring-primary ring-opacity-50' : ''
       }`}
     >
       <div className="box-border content-stretch flex flex-col gap-4 items-center justify-start overflow-clip p-[24px] relative">
         <div className="flex justify-between items-start w-full min-w-full group">
-          <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] relative shrink-0 text-[#0f4c50] text-[37px]" style={{ width: "min-content" }}>
+          <div className="font-['Rethink_Sans:Bold',_sans-serif] font-bold leading-[0] relative shrink-0 text-textColorPrimary text-[37px]" style={{ width: "min-content" }}>
             <p className="leading-[44px]">{title}</p>
           </div>
           {onEditCategory && (
             <button
               onClick={() => onEditCategory(category)}
-              className="opacity-0 group-hover:opacity-100 transition-opacity text-[#C1A07B] hover:text-[#9d825e] p-1 rounded text-[16px] mt-2"
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-secondary hover:text-secondaryHover p-1 rounded text-[16px] mt-2"
               title="Editar nome da categoria"
             >
               <EditIcon />
@@ -224,7 +224,7 @@ export function KanbanColumn({ title, category, products, onMove, onReorder, onE
           </div>
         )}
       </div>
-      <div aria-hidden="true" className="absolute border border-[#0f4c50] border-solid inset-0 pointer-events-none rounded-[16px]" />
+      <div aria-hidden="true" className="absolute border border-primary border-solid inset-0 pointer-events-none rounded-[16px]" />
     </div>
   );
 }
@@ -296,7 +296,7 @@ export function DraggableCategoryColumn({
       className={`transition-all duration-200 ${
         isDragging ? 'opacity-50 scale-95' : ''
       } ${
-        isOverCategory ? 'ring-2 ring-[#C1A07B] ring-opacity-50 rounded-[16px]' : ''
+        isOverCategory ? 'ring-2 ring-secondary ring-opacity-50 rounded-[16px]' : ''
       }`}
       style={{ cursor: 'grab' }}
     >
