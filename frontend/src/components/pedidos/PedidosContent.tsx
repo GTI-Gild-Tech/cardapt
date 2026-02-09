@@ -217,6 +217,7 @@ export default function PedidosContent() {
   const isSaving = (id: string | number) => savingId === id;
 
   const [confirmId, setConfirmId] = React.useState<string | number | null>(null);
+  const [openMenuId, setOpenMenuId] = React.useState<string | number | null>(null);
   const [previousOrderCount, setPreviousOrderCount] = React.useState(0);
 
   // Pré-carrega o áudio para garantir reprodução rápida
@@ -353,32 +354,36 @@ export default function PedidosContent() {
           const totalLabel =
             o.totalCents != null ? formatBRL(o.totalCents) : o.total ?? "";
           return (
-            <div key={o.id} className="rounded border bg-white p-4 shadow-sm">
-              <div className="flex items-start justify-between">
-                {/* Bloco esquerdo: dados */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-semibold text-textColorPrimary">
-                      Pedido #{o.orderNumber ?? o.id}
-                    </h3>
-                    <StatusPill status={o.status} />
-                  </div>
-
-                  <div className="text-sm text-start text-gray-600">
-                    <p>
-                      Cliente: <strong>{o.name || "—"}</strong> • Mesa:{" "}
-                      <strong>{o.table || "—"}</strong>
-                    </p>
-                    <p>
-                      Itens: <strong>{o.items?.length ?? 0}</strong> • Total:{" "}
-                      <strong>{totalLabel}</strong>
-                    </p>
-                  </div>
+            <div key={o.id} className="rounded-lg border-primary bg-white p-4 shadow-sm">
+              <div className="flex flex-col">
+                {/* Linha superior: Pedido + StatusPill */}
+                <div className="flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-textColorPrimary">
+                    Pedido #{o.orderNumber ?? o.id}
+                  </h3>
+                  <StatusPill status={o.status} />
                 </div>
 
-                {/* Bloco direito: ações */}
-                <div className="flex flex-col items-end gap-2">
-                  <div className="flex items-center gap-2">
+                {/* Linha inferior: dados + ações */}
+                <div className="flex items-center justify-between gap-4">
+                  {/* Dados da esquerda */}
+                  <div className="text-sm text-gray-600 flex items-center gap-4">
+                    <span>
+                      Cliente: <strong>{o.name || "—"}</strong>
+                    </span>
+                    <span>
+                      Mesa: <strong>{o.table || "—"}</strong>
+                    </span>
+                    <span>
+                      Itens: <strong>{o.items?.length ?? 0}</strong>
+                    </span>
+                    <span>
+                      Total: <strong>{totalLabel}</strong>
+                    </span>
+                  </div>
+
+                  {/* Ações da direita */}
+                  <div className="flex items-center gap-2 relative">
                     <span className="text-sm text-gray-600">Status</span>
                     <StatusSelect
                       value={o.status}
@@ -392,28 +397,46 @@ export default function PedidosContent() {
                         }
                       }}
                     />
-                  </div>
 
-                  <div className="flex flex-wrap gap-2">
                     <ActionButton onClick={() => handleViewOrder(o)}>
                       Ver pedido
                     </ActionButton>
 
-                    <button
-                      className="rounded border px-3 py-1 text-sm hover:bg-gray-50"
-                      disabled={isSaving(o.id)}
-                      onClick={() => updateOrderStatus(o.id, "pronto")}
-                    >
-                      Marcar como pronto
-                    </button>
+                    {/* Menu de 3 pontos */}
+                    <div className="relative">
+                      <button
+                        onClick={() => setOpenMenuId(openMenuId === o.id ? null : o.id)}
+                        className="rounded px-2 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
+                        title="Mais opções"
+                      >
+                        ⋯
+                      </button>
 
-                    <button
-                      className="rounded border border-red-300 px-3 py-1 text-sm text-red-600 hover:bg-red-50"
-                      disabled={isSaving(o.id)}
-                      onClick={() => setConfirmId(o.id)}
-                    >
-                      Cancelar
-                    </button>
+                      {openMenuId === o.id && (
+                        <div className="absolute right-0 top-full mt-1 bg-white border rounded-lg shadow-lg z-10 min-w-[180px]">
+                          <button
+                            onClick={() => {
+                              updateOrderStatus(o.id, "pronto");
+                              setOpenMenuId(null);
+                            }}
+                            disabled={isSaving(o.id)}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors first:rounded-t-lg"
+                          >
+                            Marcar como pronto
+                          </button>
+                          <button
+                            onClick={() => {
+                              setConfirmId(o.id);
+                              setOpenMenuId(null);
+                            }}
+                            disabled={isSaving(o.id)}
+                            className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors last:rounded-b-lg"
+                          >
+                            Cancelar
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
