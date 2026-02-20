@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primary: "#2563eb";
+  --tertiary: "#9333ea";
+  --tertiary: "#f59e0b";
+  --quaternary: "#10b981";
+}
+
+/* Scrollbar customizado (funciona no Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px; /* largura da barra */
+  height: 10px; /* altura no scroll horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(240, 238, 233) ; /* cor de fundo do trilho */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5c1600; /* cor da barrinha */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #471100; /* cor ao passar o mouse */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #5c1600 rgb(240, 238, 233); /* thumb | track */
+}
+
+body {
+  @apply bg-[#f4f3f3];
+
+}
+
+@font-face {
+  font-family: 'PrimaryFont';
+  src: url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'tertiaryFont';
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
