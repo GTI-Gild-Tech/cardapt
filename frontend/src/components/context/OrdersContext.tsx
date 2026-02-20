@@ -1,4 +1,4 @@
-// src/components/context/OrdersContext.tsx
+// /src/components/context/OrdersContext.tsx
 import React, {
   createContext,
   useCallback,
@@ -7,7 +7,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import api from "../../services/api";
+import { supabase } from "../../lib/supabase"; // <-- ajuste o caminho se necessário
 import { fromApiStatus, toApiStatus, PtStatus } from "../../services/status";
 import ErrorPopup from "../ErrorPopup";
 
@@ -105,7 +105,7 @@ function formatOrderDTO(dto: any): OrderUI {
 
   const items: OrderItemUI[] = (rawItems as any[]).map((it) => {
     const p = it?.product ?? it?.Product ?? {};
-    const name = p?.name ?? it?.product_name ?? it?.name ?? "";
+    const name = p?.name ?? it?.product_name ?? it?.name_snapshot ?? it?.name ?? "";
     const category =
       p?.category?.name ??
       p?.Category?.name ??
@@ -185,9 +185,20 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     setLoading(true);
     setError(null);
     try {
-      const { data } = await api.get("/orders");
-      //console.log("[OrdersContext] GET /orders → data:", data);
-      const list: any[] = Array.isArray(data) ? data : data?.orders ?? [];
+      // Traz pedidos + itens (PostgREST nesting)
+      const { data, error: sbErr } = await supabase
+        .from("orders")
+        .select(
+          `
+          *,
+          order_items (*)
+        `
+        )
+        .order("created_at", { ascending: false });
+
+      if (sbErr) throw sbErr;
+
+      const list: any[] = Array.isArray(data) ? data : [];
       const mapped = list.map(formatOrderDTO);
       setOrders(mapped);
     } catch (err: any) {
@@ -201,44 +212,80 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const createOrderFromCart = useCallback(
     async (params: CreateFromCartParams): Promise<OrderUI> => {
       const { name, table, items } = params;
-      const payload = {
-        customer: { name },
-        table_number: table,
-        items: items.map((it) => ({
+
+      const safeItems = (items ?? []).filter((it) => (it?.quantity ?? 0) > 0);
+
+      if (safeItems.length === 0) {
+        const e = new Error("Carrinho vazio.");
+        throw e;
+      }
+
+      const totalCents = safeItems.reduce(
+        (acc, it) => acc + (it.unitPriceCents || 0) * (it.quantity || 0),
+        0
+      );
+
+      // status inicial no padrão do teu mapper
+      const initialStatusApi = "pending";
+
+      try {
+        // 1) cria pedido
+        const { data: orderRow, error: orderErr } = await supabase
+          .from("orders")
+          .insert({
+            customer_name: name,
+            table_number: table,
+            status: initialStatusApi,
+            total_cents: totalCents,
+          })
+          .select("*")
+          .single();
+
+        if (orderErr) throw orderErr;
+
+        const orderId = orderRow?.id;
+        if (!orderId) throw new Error("Pedido criado sem id.");
+
+        // 2) cria itens
+        const itemsPayload = safeItems.map((it) => ({
+          order_id: orderId,
           product_id: it.productId,
-          size: it.size,
+          name_snapshot: it.name ?? null,
+          size: it.size ?? null,
           quantity: it.quantity,
           unit_price_cents: it.unitPriceCents,
           total_cents: it.unitPriceCents * it.quantity,
-        })),
-      };
+        }));
 
-      console.log("[OrdersContext] POST /orders payload:", payload);
+        const { error: itemsErr } = await supabase
+          .from("order_items")
+          .insert(itemsPayload);
 
-      try {
-        const res = await api.post("/orders", payload);
-        console.log("[OrdersContext] POST /orders response:", res.data);
-        const saved = res.data?.order ?? res.data;
-        const formatted = formatOrderDTO(saved);
+        if (itemsErr) throw itemsErr;
+
+        // 3) re-busca o pedido completo (com itens) pra devolver certinho pra UI
+        const { data: full, error: fullErr } = await supabase
+          .from("orders")
+          .select(`*, order_items (*)`)
+          .eq("id", orderId)
+          .single();
+
+        if (fullErr) throw fullErr;
+
+        const formatted = formatOrderDTO(full);
         setOrders((prev) => [formatted, ...prev]);
-        return formatted; // ✅ devolve o pedido confirmado pelo backend
+        return formatted;
       } catch (err: any) {
-        console.error("[OrdersContext] POST /orders error:", err);
+        console.error("[OrdersContext] createOrderFromCart error:", err);
 
-        // Extrai mensagem do backend (se houver) e padroniza para o usuário
-        const backendMsg =
-          err?.response?.data?.message ||
-          err?.response?.data?.error ||
-          err?.message;
-
+        const backendMsg = err?.message;
         const userMsg =
           backendMsg && String(backendMsg).trim().length > 0
             ? String(backendMsg)
             : "Não conseguimos salvar seu pedido. Tente novamente.";
 
         const e = new Error(userMsg);
-        (e as any).status = err?.response?.status;
-        throw e; // ❌ UI captura e exibe a mensagem amigável
+        throw e;
       }
     },
     []
@@ -247,15 +294,20 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const updateOrderStatus = useCallback(
     async (id: number | string, newStatusPt: PtStatus) => {
       const status = toApiStatus(newStatusPt);
-      console.log("[OrdersContext] PUT /orders/%s status:", id, status);
+
       try {
-        const res = await api.put(`/orders/${id}`, { status });
-        console.log("[OrdersContext] PUT /orders response:", res.data);
+        const { error: sbErr } = await supabase
+          .from("orders")
+          .update({ status })
+          .eq("id", id);
+
+        if (sbErr) throw sbErr;
+
         setOrders((prev) =>
           prev.map((o) => (o.id === id ? { ...o, status: newStatusPt } : o))
         );
       } catch (err: any) {
-        console.error("[OrdersContext] PUT /orders error:", err);
+        console.error("[OrdersContext] updateOrderStatus error:", err);
         throw err;
       }
     },
@@ -267,28 +319,31 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       id: number | string,
       data: { name?: string; table?: string | number }
     ) => {
-      const payload = {
-        customer: { name: data.name },
-        table: data.table,
-        table_number: data.table,
-      };
-      console.log("[OrdersContext] PUT /orders/%s payload:", id, payload);
       try {
-        const res = await api.put(`/orders/${id}`, payload);
-        console.log("[OrdersContext] PUT /orders response:", res.data);
+        const payload: any = {};
+        if (typeof data.name !== "undefined") payload.customer_name = data.name;
+        if (typeof data.table !== "undefined") payload.table_number = data.table;
+
+        const { error: sbErr } = await supabase
+          .from("orders")
+          .update(payload)
+          .eq("id", id);
+
+        if (sbErr) throw sbErr;
+
         setOrders((prev) =>
           prev.map((o) =>
             o.id === id
               ? {
                   ...o,
-                  name: data.name ?? o.name,
-                  table: data.table ?? o.table,
+                  name: typeof data.name !== "undefined" ? data.name : o.name,
+                  table: typeof data.table !== "undefined" ? data.table : o.table,
                 }
               : o
           )
         );
       } catch (err: any) {
-        console.error("[OrdersContext] PUT /orders error:", err);
+        console.error("[OrdersContext] updateOrderInfo error:", err);
         throw err;
       }
     },
@@ -296,12 +351,14 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   );
 
   const deleteOrder = useCallback(async (id: number | string) => {
-    console.log("[OrdersContext] DELETE /orders/%s", id);
     try {
-      await api.delete(`/orders/${id}`);
+      // com FK on delete cascade, itens vão junto
+      const { error: sbErr } = await supabase.from("orders").delete().eq("id", id);
+      if (sbErr) throw sbErr;
+
       setOrders((prev) => prev.filter((o) => o.id !== id));
     } catch (err: any) {
-      console.error("[OrdersContext] DELETE /orders error:", err);
+      console.error("[OrdersContext] deleteOrder error:", err);
       throw err;
     }
   }, []);

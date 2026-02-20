@@ -36,6 +36,10 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [lastCustomerName, setLastCustomerName] = useState("");
+  const [lastTableNumber, setLastTableNumber] = useState<string>("");
+  const [lastTotalCents, setLastTotalCents] = useState(0);
+
 
   const subtotalCents = useMemo(
     () =>
@@ -66,10 +70,16 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
         items: cartItems.map((it) => ({
           productId: it.productId,          // <- do carrinho
           size: it.size,
+          name: it.name,  
           quantity: Number(it.quantity || 0),
           unitPriceCents: Number(it.unitPriceCents || 0),
         })),
       });
+
+      setLastCustomerName(customerName.trim());
+      setLastTableNumber(tableNumber.trim());
+      setLastTotalCents(subtotalCents);
+
 
       clearCart();
       setShowOrderSuccess(true);
@@ -94,9 +104,9 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
           setShowOrderSuccess(false);
           onClose();
         }}
-        customerName={customerName}
-        tableNumber={tableNumber}
-        total={subtotalCents / 100}
+        customerName={lastCustomerName}
+        tableNumber={lastTableNumber}
+        total={lastTotalCents / 100}
       />
     );
   }

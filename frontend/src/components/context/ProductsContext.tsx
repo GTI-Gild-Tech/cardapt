@@ -6,81 +6,93 @@ import React, {
   useCallback,
   useMemo,
   PropsWithChildren,
-} from 'react';
-import axios from 'axios';
-import type { Product } from '../cardapio/KanbanComponents';
+} from "react";
+import type { Product } from "../cardapio/KanbanComponents";
+ import { supabase } from '../../lib/supabase';
 
-// ---------- Tipos vindos do backend ----------
-type CategoryDTO = { id?: string; category_id?: string | number; name: string; slug?: string };
-type ProductDTO = Product; // ajuste se seu backend devolver outro shape
 
-// ---------- Axios base ----------
+// =====================
+// Helpers (preço/JSON)
+// =====================
 
-import { api } from '../../services/api';
+// "1.234,56" | "1234,56" | "1234.56" | 12.5 -> 123456 (cents)
+function moneyToCents(v: unknown): number {
+  if (v == null) return 0;
+  if (typeof v === "number") return Math.round(v * 100);
 
-// ---------- URL helper ----------
-const toPublicUrl = (u?: string | null) => {
-  if (!u) return u as any;                       // mantém falsy -> placeholder
-  if (/^https?:\/\//i.test(u)) return u;         // já é absoluta
-  const base = (api.defaults.baseURL || '').replace(/\/api$/, '');
-  const path = u.startsWith('/uploads/') ? u
-            : (u.startsWith('uploads/') ? `/${u}` : `/uploads/${u}`);
-  return `${base}${path}`;
+  const s = String(v).trim();
+  if (!s) return 0;
+
+  // remove separador de milhar e normaliza decimal
+  const norm = s.replace(/\./g, "").replace(",", ".");
+  const n = Number(norm);
+  return Number.isFinite(n) ? Math.round(n * 100) : 0;
+}
+
+function centsToMoney(cents: unknown): number {
+  const n = Number(cents);
+  if (!Number.isFinite(n)) return 0;
+  return n / 100;
+}
+
+type SizeRow = {
+  label: string;
+  price_cents: number;
+  qty: number;
 };
 
-// ---------- Upload helper (se precisar em outro ponto) ----------
-async function uploadImage(file: File): Promise<string> {
-  const fd = new FormData();
-  fd.append('file', file);
-  const { data } = await api.post('/uploads', fd, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-  return data?.url || data?.location || data?.secure_url;
+// Converte o Product da UI -> sizes JSONB do banco
+function productToSizesJson(p: Product): SizeRow[] {
+  const raw = Array.isArray(p.sizes) ? p.sizes : [];
+  return raw.map((s: any) => ({
+    label: String(s.size ?? s.label ?? s.name ?? "Único"),
+    price_cents: moneyToCents(s.price ?? s.price_cents ?? 0),
+    qty: Math.max(1, Number(s.qty ?? s.quantity ?? 1) || 1),
+  }));
+}
+
+// Converte sizes JSONB do banco -> Product.sizes (UI usa reais)
+function sizesJsonToProductSizes(sizes: any): { size: string; price: number; qty?: number }[] {
+  if (!Array.isArray(sizes)) return [];
+  return sizes.map((s: any) => ({
+    size: String(s.label ?? s.size ?? s.name ?? "Único"),
+    price: centsToMoney(s.price_cents ?? s.priceCents ?? 0),
+    qty: Math.max(1, Number(s.qty ?? 1) || 1),
+  }));
 }
 
 // =====================
-// NORMALIZAÇÃO DE PREÇO
+// Storage (imagem)
 // =====================
 
-// "1.234,56" | "1234,56" | "1234.56" | 12.5 -> "1234.56"
-function normalizeMoneyString(v: unknown, fallback = "0.00"): string {
-  if (v == null) return fallback;
-  if (typeof v === "number") return (v as number).toString();
-  const s = String(v).trim();
-  if (!s) return fallback;
-  return s.replace(/\./g, "").replace(",", ".");
+const BUCKET = "product-images"; // crie esse bucket no Supabase Storage
+
+function buildImagePath(productId: string, file: File) {
+  const ext = (file.name.split(".").pop() || "png").toLowerCase();
+  return `products/${productId}/${Date.now()}.${ext}`;
 }
 
-// Normaliza campos de preço dentro de cada size (sem mudar o shape)
-function normalizeSizesPrices(sizes: any[] = []): any[] {
-  const PRICE_KEYS = [
-    "price", "preco", "valor",
-    "unit_price", "unitPrice",
-    "priceCents", "price_cents", "unit_price_cents", "valor_cents"
-  ];
+async function uploadProductImage(productId: string, file: File) {
+  const path = buildImagePath(productId, file);
 
-  return sizes.map((s) => {
-    const copy: any = { ...s };
-    for (const k of PRICE_KEYS) {
-      if (copy[k] != null) {
-        if (/_cents$/i.test(k) || /Cents$/.test(k)) {
-          // se vier "2,50" num campo *_cents, converte para 250
-          const n = parseFloat(normalizeMoneyString(copy[k], "0"));
-          copy[k] = Number.isFinite(n) ? Math.round(n * 100) : 0;
-        } else if (typeof copy[k] === "string") {
-          // campos em reais ficam como string com ponto decimal
-          copy[k] = normalizeMoneyString(copy[k]);
-        }
-      }
-    }
-    return copy;
-  });
+  const { error: upErr } = await supabase.storage
+    .from(BUCKET)
+    .upload(path, file, { upsert: true });
+
+  if (upErr) throw upErr;
+
+  // Se o bucket for público:
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
 }
 
-// ---------- Contrato do contexto ----------
+// =====================
+// Tipos do Contexto
+// =====================
+
 type ProductsCtx = {
   products: Product[];
-  categories: string[]; // seguimos expondo só os nomes (pra não quebrar nada)
+  categories: string[];
   loading: boolean;
   error: string | null;
 
@@ -100,127 +112,71 @@ type ProductsCtx = {
 
 const ProductsContext = createContext<ProductsCtx | undefined>(undefined);
 
-const toNumber = (v: unknown) => {
-  if (v == null) return null;
-  const n = Number(String(v).trim().replace(",", "."));
-  return Number.isFinite(n) ? n : null;
-};
+// =====================
+// Provider
+// =====================
 
-// ⚠️ SUBSTITUA o seu mapProductDTO por este:
-const mapProductDTO = (dto: any): Product => {
-  // 1) obter sizes do jeito que vier (array, string JSON, null…)
-  let rawSizes: any = dto.sizes;
-  if (!Array.isArray(rawSizes) && typeof rawSizes === "string") {
-    try {
-      const parsed = JSON.parse(rawSizes);
-      if (Array.isArray(parsed)) rawSizes = parsed;
-    } catch { /* ignora */ }
-  }
-
-  // 2) normalizar cada price para número
-  let sizes: { size: string; price: number }[] = [];
-  if (Array.isArray(rawSizes)) {
-    sizes = rawSizes.map((s: any) => ({
-      size: s.size ?? s.label ?? s.name ?? "Único",
-      price: toNumber(s.price ?? s.price_cents / 100) ?? 0,
-    }));
-  }
-
-  // 3) fallback: se não veio sizes, usar preço único
-  if (!sizes.length) {
-    const pUni = toNumber(dto.uniquePrice ?? dto.price ?? dto.unit_price);
-    if (pUni !== null) sizes = [{ size: "Único", price: pUni }];
-  }
-
-  return {
-    id: String(dto.id ?? dto._id ?? dto.productId ?? dto.product_id),
-    name: dto.name,
-    category: dto.category,
-    description: dto.description,
-    sizes,
-    imageUrl: toPublicUrl(dto.imageUrl),
-    order: dto.order ?? 0,
-  };
-};
-// ---------- Provider ----------
 export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // name -> id
   const [categoryByName, setCategoryByName] = useState<Record<string, string>>({});
+  // id -> name (pra mapear produtos)
+  const [categoryNameById, setCategoryNameById] = useState<Record<string, string>>({});
 
-  // ---------- Helpers de estado ----------
-  const replaceProduct = useCallback((p: Product) => {
-    setProducts(prev => prev.map(x => (x.id === p.id ? p : x)));
-  }, []);
-
-  const replaceOrInsertProduct = useCallback((p: Product, tempId?: string) => {
-    setProducts(prev => {
-      const byFinalIdIdx = prev.findIndex(x => x.id === p.id);
-      if (byFinalIdIdx >= 0) {
-        const clone = prev.slice();
-        clone[byFinalIdIdx] = p;
-        return clone;
-      }
-      if (tempId) {
-        const byTempIdx = prev.findIndex(x => x.id === tempId);
-        if (byTempIdx >= 0) {
-          const clone = prev.slice();
-          clone[byTempIdx] = p;
-          return clone;
-        }
-      }
-      return [p, ...prev];
-    });
-  }, []);
-
-  const removeProduct = useCallback((id: string) => {
-    setProducts(prev => prev.filter(x => x.id !== id));
-  }, []);
-
-  const addProductLocal = useCallback((p: Product) => {
-    setProducts(prev => [p, ...prev]);
-  }, []);
-
-  // ---------- Hidratar dados ----------
-  const fetchData: () => Promise<void> = useCallback(async () => {
+  // =====================
+  // Fetch (hidratação)
+  // =====================
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
+
     try {
-      const [prodRes, catRes] = await Promise.all([
-        api.get('/products'),
-        api.get('/categories'),
-      ]);
+      // 1) categorias (ordenadas pelo "order")
+      const { data: cats, error: catsErr } = await supabase
+        .from("categories")
+        .select("id,name,order")
+        .order("order", { ascending: true });
 
-      // produtos
-      setProducts((prodRes.data as any[]).map(mapProductDTO));
+      if (catsErr) throw catsErr;
 
-      // categorias: guardamos nomes (pra UI) e mapeamos name -> id (pra API)
-      const rawCats = (catRes.data as any[]) as CategoryDTO[];
-      const catsNormalized = rawCats.map((c) => {
-        const id = String(
-          c.id ??
-          (c as any).category_id ??
-          (c as any).CategoryId ??
-          (c as any).CategoryID
-        );
-        const name = (c.name ??
-          (c as any).title ??
-          (c as any).slug ??
-          String(c)) as string;
+      const names = (cats ?? []).map((c: any) => String(c.name));
+      setCategories(names);
 
-        return { id, name };
-      });
+      const byName: Record<string, string> = {};
+      const byId: Record<string, string> = {};
+      for (const c of cats ?? []) {
+        byName[String(c.name)] = String(c.id);
+        byId[String(c.id)] = String(c.name);
+      }
+      setCategoryByName(byName);
+      setCategoryNameById(byId);
 
-      setCategories(catsNormalized.map((c) => c.name));
-      setCategoryByName(
-        Object.fromEntries(catsNormalized.map((c) => [c.name, c.id]))
-      );
+      // 2) produtos (ordenados por categoria_id + order)
+      const { data: prods, error: prodsErr } = await supabase
+        .from("products")
+        .select("id,name,description,image_url,order,sizes,category_id")
+        .order("category_id", { ascending: true })
+        .order("order", { ascending: true });
+
+      if (prodsErr) throw prodsErr;
+
+      const mapped: Product[] = (prods ?? []).map((p: any) => ({
+        id: String(p.id),
+        name: String(p.name),
+        description: p.description ?? "",
+        category: byId[String(p.category_id)] ?? "Sem categoria",
+        sizes: sizesJsonToProductSizes(p.sizes),
+        imageUrl: p.image_url ?? "",
+        order: p.order ?? 0,
+      }));
+
+      setProducts(mapped);
     } catch (e: any) {
-      setError(e?.response?.data?.message ?? e?.message ?? 'Erro ao buscar dados');
+      setError(e?.message ?? "Erro ao buscar dados no Supabase");
     } finally {
       setLoading(false);
     }
@@ -230,394 +186,398 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
     void fetchData();
   }, [fetchData]);
 
-  const clearJsonHeaders = () => {
-    try {
-      delete (api.defaults.headers as any).post?.['Content-Type'];
-      delete (api.defaults.headers as any).put?.['Content-Type'];
-    } catch {}
-  };
+  // =====================
+  // Helpers de estado
+  // =====================
+  const replaceProductLocal = useCallback((p: Product) => {
+    setProducts((prev) => prev.map((x) => (x.id === p.id ? p : x)));
+  }, []);
 
-  // ---------- Ações em Produto ----------
-  const addProductFn = useCallback(
-    async (p: Product, imageFile?: File) => {
-      const tempId = p.id || crypto.randomUUID();
-      const tempUrl = imageFile ? URL.createObjectURL(imageFile) : undefined;
+  const removeProductLocal = useCallback((id: string) => {
+    setProducts((prev) => prev.filter((x) => x.id !== id));
+  }, []);
+
+  // =====================
+  // Categorias (CRUD + ordem)
+  // =====================
+  const addCategory = useCallback(
+    async (name: string) => {
+      const n = name.trim();
+      if (!n) return;
+
+      if (categories.includes(n)) {
+        throw new Error("Esta categoria já existe!");
+      }
+
+      // ordem = fim
+      const newOrder = categories.length;
 
       // otimista
-      addProductLocal({ ...p, id: String(tempId), imageUrl: p.imageUrl ?? tempUrl });
+      setCategories((prev) => [...prev, n]);
+
+      const { data, error: insErr } = await supabase
+        .from("categories")
+        .insert({ name: n, order: newOrder })
+        .select("id,name,order")
+        .single();
+
+      if (insErr) {
+        // rollback
+        setCategories((prev) => prev.filter((c) => c !== n));
+        throw insErr;
+      }
+
+      // atualizar maps
+      setCategoryByName((m) => ({ ...m, [n]: String(data.id) }));
+      setCategoryNameById((m) => ({ ...m, [String(data.id)]: n }));
+    },
+    [categories]
+  );
+
+  const updateCategory = useCallback(
+    async (oldName: string, newName: string) => {
+      const nn = newName.trim();
+      if (!nn) return;
+      if (oldName === nn) return;
+      if (categories.includes(nn)) throw new Error("Esta categoria já existe!");
+
+      const id = categoryByName[oldName];
+      if (!id) throw new Error("Categoria não encontrada (map name->id vazio).");
+
+      const prevCats = categories.slice();
+      const prevProds = products.slice();
+
+      // otimista
+      setCategories((prev) => prev.map((c) => (c === oldName ? nn : c)));
+      setProducts((prev) => prev.map((p) => (p.category === oldName ? { ...p, category: nn } : p)));
+
+      const { error: upErr } = await supabase.from("categories").update({ name: nn }).eq("id", id);
+      if (upErr) {
+        setCategories(prevCats);
+        setProducts(prevProds);
+        throw upErr;
+      }
+
+      // map updates
+      setCategoryByName((m) => {
+        const clone = { ...m };
+        const keepId = clone[oldName];
+        delete clone[oldName];
+        clone[nn] = keepId;
+        return clone;
+      });
+      setCategoryNameById((m) => ({ ...m, [id]: nn }));
+    },
+    [categories, products, categoryByName]
+  );
+
+  const deleteCategory = useCallback(
+    async (name: string) => {
+      const id = categoryByName[name];
+      if (!id) throw new Error("Categoria não encontrada (map name->id vazio).");
+
+      // regra local (sua UI já faz): não deletar se tiver produto
+      const hasProducts = products.some((p) => p.category === name);
+      if (hasProducts) throw new Error("Não é possível excluir categoria com produtos.");
+
+      const prevCats = categories.slice();
+      setCategories((prev) => prev.filter((c) => c !== name)); // otimista
+
+      const { error: delErr } = await supabase.from("categories").delete().eq("id", id);
+      if (delErr) {
+        setCategories(prevCats);
+        throw delErr;
+      }
+
+      // limpa maps
+      setCategoryByName((m) => {
+        const clone = { ...m };
+        delete clone[name];
+        return clone;
+      });
+      setCategoryNameById((m) => {
+        const clone = { ...m };
+        delete clone[id];
+        return clone;
+      });
+    },
+    [categoryByName, categories, products]
+  );
+
+  const reorderCategories = useCallback(
+    async (categoryName: string, newIndex: number) => {
+      const currIndex = categories.indexOf(categoryName);
+      if (currIndex === -1) return;
+      if (currIndex === newIndex) return;
+
+      const prevCats = categories.slice();
+
+      // otimista
+      const next = categories.slice();
+      const [moved] = next.splice(currIndex, 1);
+      next.splice(newIndex, 0, moved);
+      setCategories(next);
+
+      // persistir: atualiza order de TODAS (simples e consistente)
+      try {
+        const updates = next.map((name, idx) => ({
+          id: categoryByName[name],
+          order: idx,
+        }));
+
+        // valida ids
+        if (updates.some((u) => !u.id)) throw new Error("Map de categoria quebrado (faltando id).");
+
+        const { error: upErr } = await supabase.from("categories").upsert(updates, { onConflict: "id" });
+        if (upErr) throw upErr;
+      } catch (e) {
+        setCategories(prevCats);
+        throw e;
+      }
+    },
+    [categories, categoryByName]
+  );
+
+  // =====================
+  // Produtos (CRUD + move + ordem)
+  // =====================
+  const addProduct = useCallback(
+    async (p: Product, imageFile?: File) => {
+      const catId = categoryByName[p.category];
+      if (!catId) throw new Error("Categoria inválida (sem id). Crie a categoria antes.");
+
+      // order = fim da categoria
+      const maxOrder = Math.max(
+        -1,
+        ...products.filter((x) => x.category === p.category).map((x) => x.order ?? 0)
+      );
+      const newOrder = maxOrder + 1;
+
+      // otimista (id temporário)
+      const tempId = crypto.randomUUID();
+      const tempUrl = imageFile ? URL.createObjectURL(imageFile) : p.imageUrl;
+      const optimistic: Product = {
+        ...p,
+        id: tempId,
+        order: newOrder,
+        imageUrl: tempUrl ?? "",
+      };
+      setProducts((prev) => [optimistic, ...prev]);
 
       try {
-        // NORMALIZAÇÕES DE PREÇO (vírgula → ponto, cents quando aplicável)
-        const uniquePriceNorm = normalizeMoneyString((p as any).uniquePrice, "0.00");
-        const sizesNorm = normalizeSizesPrices(p.sizes || []);
+        // 1) insert no banco (sem imagem primeiro)
+        const payload = {
+          category_id: catId,
+          name: p.name,
+          description: p.description ?? "",
+          order: newOrder,
+          sizes: productToSizesJson(p), // jsonb
+          image_url: null as string | null,
+        };
 
+        const { data: created, error: insErr } = await supabase
+          .from("products")
+          .insert(payload)
+          .select("id,category_id,name,description,image_url,order,sizes")
+          .single();
+
+        if (insErr) throw insErr;
+
+        let imageUrlFinal = created.image_url ?? "";
+
+        // 2) upload imagem se veio arquivo
         if (imageFile) {
-          // ENVIA COMO FORMDATA (com arquivo)
-          clearJsonHeaders();
-          const fd = new FormData();
-          fd.append('name', p.name);
-          fd.append('category', p.category);
-          fd.append('description', p.description ?? '');
-          fd.append('uniquePrice', uniquePriceNorm); // "12.50"
-          fd.append('sizes', JSON.stringify(sizesNorm));
-          fd.append('stock_qty', String((p as any).stock_qty ?? 0));
-          fd.append('active', String((p as any).active ?? 1));
-          fd.append('file', imageFile);
+          imageUrlFinal = await uploadProductImage(String(created.id), imageFile);
 
-          const { data } = await api.post('/products', fd, { headers: {} });
-          replaceOrInsertProduct(mapProductDTO(data), String(tempId));
-        } else {
-          // SEM arquivo: JSON
-          const payload = {
-            name: p.name,
-            category: p.category,
-            description: p.description ?? '',
-            uniquePrice: uniquePriceNorm,
-            sizes: sizesNorm,
-            stock_qty: (p as any).stock_qty ?? 0,
-            active: (p as any).active ?? 1,
-            imageUrl: p.imageUrl ?? null,
-          };
-          const { data } = await api.post('/products', payload);
-          replaceOrInsertProduct(mapProductDTO(data), String(tempId));
+          const { error: imgErr } = await supabase
+            .from("products")
+            .update({ image_url: imageUrlFinal })
+            .eq("id", created.id);
+
+          if (imgErr) throw imgErr;
         }
+
+        // 3) substituir o produto otimista
+        const finalProduct: Product = {
+          id: String(created.id),
+          name: String(created.name),
+          description: created.description ?? "",
+          category: p.category,
+          sizes: sizesJsonToProductSizes(created.sizes),
+          imageUrl: imageUrlFinal ?? "",
+          order: created.order ?? 0,
+        };
+
+        setProducts((prev) => prev.map((x) => (x.id === tempId ? finalProduct : x)));
       } catch (e) {
-        removeProduct(String(tempId)); // rollback
+        // rollback
+        setProducts((prev) => prev.filter((x) => x.id !== tempId));
         throw e;
       } finally {
-        if (tempUrl) URL.revokeObjectURL(tempUrl);
+        if (imageFile && tempUrl) URL.revokeObjectURL(tempUrl);
       }
     },
-    [addProductLocal, removeProduct, replaceOrInsertProduct]
+    [categoryByName, products]
   );
 
-  const updateProductFn = useCallback(
+  const updateProduct = useCallback(
     async (p: Product, imageFile?: File) => {
-      const prev = products.find(x => x.id === p.id);
+      const prev = products.find((x) => x.id === p.id);
       if (!prev) return;
 
-      replaceProduct(p); // otimista
+      const catId = categoryByName[p.category];
+      if (!catId) throw new Error("Categoria inválida (sem id).");
+
+      // otimista
+      replaceProductLocal(p);
 
       try {
-        // NORMALIZAÇÕES DE PREÇO
-        const uniquePriceNorm = normalizeMoneyString((p as any).uniquePrice, "0.00");
-        const sizesNorm = normalizeSizesPrices(p.sizes || []);
+        let imageUrlFinal = p.imageUrl ?? prev.imageUrl ?? "";
 
         if (imageFile) {
-          // FORMDATA (com arquivo)
-          clearJsonHeaders();
-          const fd = new FormData();
-          fd.append('name', p.name);
-          if (p.description != null) fd.append('description', p.description);
-          fd.append('category', p.category);
-          fd.append('uniquePrice', uniquePriceNorm);
-          fd.append('sizes', JSON.stringify(sizesNorm));
-          fd.append('stock_qty', String((p as any).stock_qty ?? 0));
-          fd.append('active', String((p as any).active ?? 1));
-          fd.append('file', imageFile);
-
-          const { data } = await api.put(`/products/${p.id}`, fd, { headers: {} });
-          replaceProduct(mapProductDTO(data));
-        } else {
-          // JSON (sem arquivo)
-          const payload: any = {
-            name: p.name,
-            description: p.description ?? '',
-            category: p.category,
-            uniquePrice: uniquePriceNorm,
-            sizes: sizesNorm,
-            stock_qty: (p as any).stock_qty ?? 0,
-            active: (p as any).active ?? 1,
-            imageUrl: p.imageUrl ?? null,
-          };
-          const { data } = await api.put(`/products/${p.id}`, payload);
-          replaceProduct(mapProductDTO(data));
+          imageUrlFinal = await uploadProductImage(p.id, imageFile);
         }
+
+        const payload = {
+          category_id: catId,
+          name: p.name,
+          description: p.description ?? "",
+          sizes: productToSizesJson(p),
+          image_url: imageUrlFinal || null,
+        };
+
+        const { data, error: upErr } = await supabase
+          .from("products")
+          .update(payload)
+          .eq("id", p.id)
+          .select("id,category_id,name,description,image_url,order,sizes")
+          .single();
+
+        if (upErr) throw upErr;
+
+        const updated: Product = {
+          id: String(data.id),
+          name: String(data.name),
+          description: data.description ?? "",
+          category: categoryNameById[String(data.category_id)] ?? p.category,
+          sizes: sizesJsonToProductSizes(data.sizes),
+          imageUrl: data.image_url ?? "",
+          order: data.order ?? 0,
+        };
+
+        replaceProductLocal(updated);
       } catch (e) {
-        replaceProduct(prev); // rollback
+        // rollback
+        replaceProductLocal(prev);
         throw e;
       }
     },
-    [products, replaceProduct]
+    [products, categoryByName, categoryNameById, replaceProductLocal]
   );
 
-  console.log('[ProductsContext] baseURL =', api.defaults.baseURL);
+  const deleteProduct = useCallback(
+    async (id: string) => {
+      const snapshot = products.slice();
 
-  const deleteProductFn: (id: string) => Promise<void> = useCallback(
-    async (id) => {
-      const snapshot = products;
-      removeProduct(id); // otimista
+      // otimista
+      removeProductLocal(id);
+
+      const { error: delErr } = await supabase.from("products").delete().eq("id", id);
+      if (delErr) {
+        setProducts(snapshot);
+        throw delErr;
+      }
+    },
+    [products, removeProductLocal]
+  );
+
+  const moveProduct = useCallback(
+    async (id: string, newCategory: string) => {
+      const prev = products.find((x) => x.id === id);
+      if (!prev) return;
+
+      const newCatId = categoryByName[newCategory];
+      if (!newCatId) throw new Error("Categoria destino inválida.");
+
+      // ordem = fim na nova categoria
+      const maxOrder = Math.max(
+        -1,
+        ...products.filter((x) => x.category === newCategory).map((x) => x.order ?? 0)
+      );
+      const newOrder = maxOrder + 1;
+
+      // otimista
+      replaceProductLocal({ ...prev, category: newCategory, order: newOrder });
+
+      const { error: upErr } = await supabase
+        .from("products")
+        .update({ category_id: newCatId, order: newOrder })
+        .eq("id", id);
+
+      if (upErr) {
+        replaceProductLocal(prev);
+        throw upErr;
+      }
+    },
+    [products, categoryByName, replaceProductLocal]
+  );
+
+  const reorderProducts = useCallback(
+    async (category: string, productId: string, newIndex: number) => {
+      const snapshot = products.slice();
+
+      const list = products
+        .filter((p) => p.category === category)
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+      const fromIndex = list.findIndex((p) => p.id === productId);
+      if (fromIndex === -1) return;
+      if (fromIndex === newIndex) return;
+
+      // otimista reorder
+      const nextList = list.slice();
+      const [moved] = nextList.splice(fromIndex, 1);
+      nextList.splice(newIndex, 0, moved);
+
+      const updated = nextList.map((p, idx) => ({ ...p, order: idx }));
+
+      setProducts((prev) => {
+        const others = prev.filter((p) => p.category !== category);
+        return [...others, ...updated];
+      });
+
       try {
-        await api.delete(`/products/${id}`);
+        // persistir: upsert de {id, order} pra todos da categoria
+        const updates = updated.map((p) => ({ id: p.id, order: p.order ?? 0 }));
+        const { error: upErr } = await supabase.from("products").upsert(updates, { onConflict: "id" });
+        if (upErr) throw upErr;
       } catch (e) {
-        setProducts(snapshot); // rollback
+        setProducts(snapshot);
         throw e;
       }
     },
-    [products, removeProduct]
+    [products]
   );
 
-  const moveProductFn: (id: string, newCategory: string) => Promise<void> =
-    useCallback(
-      async (id, newCategory) => {
-        console.log('moveProductFn called:', { id, newCategory });
-        const prev = products.find((x) => x.id === id);
-        if (!prev) {
-          console.log('Product not found:', id);
-          return;
-        }
-
-        console.log('Moving product:', prev.name, 'from', prev.category, 'to', newCategory);
-        const optimistic: Product = { ...prev, category: newCategory };
-        replaceProduct(optimistic);
-
-        try {
-          console.log('Calling API PATCH /products/' + id, { category: newCategory });
-          const response = await api.patch(`/products/${id}`, { category: newCategory });
-          console.log('API response:', response.data);
-          
-          // Atualiza com os dados retornados da API
-          if (response.data) {
-            const updatedProduct = mapProductDTO(response.data);
-            console.log('Updated product from API:', updatedProduct);
-            replaceProduct(updatedProduct);
-          }
-        } catch (e) {
-          console.error('Error moving product:', e);
-          replaceProduct(prev); // rollback
-          throw e;
-        }
-      },
-      [products, replaceProduct]
-    );
-
-  // ---------- Ações em Categoria ----------
-  const addCategoryFn: (name: string) => Promise<void> = useCallback(
-    async (name) => {
-      if (!name) return;
-      if (!categories.includes(name)) {
-        setCategories((prev) => [...prev, name]); // otimista
-      }
-      try {
-        await api.post('/categories', { name });
-        await fetchData(); // pega o id recém-criado e atualiza o mapa
-      } catch (e) {
-        setCategories((prev) => prev.filter((c) => c !== name)); // rollback
-        throw e;
-      }
-    },
-    [categories, fetchData]
-  );
-
-  const updateCategoryFn: (oldName: string, newName: string) => Promise<void> =
-    useCallback(
-      async (oldName, newName) => {
-        const prevCats = categories;
-        const prevProds = products;
-
-        // otimista: renomeia e faz cascade visual
-        setCategories((prev) =>
-          prev.map((c) => (c === oldName ? newName : c))
-        );
-        setProducts((prev) =>
-          prev.map((p) => (p.category === oldName ? { ...p, category: newName } : p))
-        );
-
-        try {
-          // resolve id pelo nome
-          let id = categoryByName[oldName];
-          if (!id) {
-            await fetchData(); // tenta refrescar
-            id = categoryByName[oldName];
-          }
-          if (!id) throw new Error('Categoria não encontrada para atualizar.');
-
-          await api.put(`/categories/${encodeURIComponent(id)}`, { name: newName });
-
-          // atualiza o mapa localmente
-          setCategoryByName((m) => {
-            const clone = { ...m };
-            const foundId = clone[oldName];
-            if (foundId) {
-              delete clone[oldName];
-              clone[newName] = foundId;
-            }
-            return clone;
-          });
-        } catch (e) {
-          setCategories(prevCats); // rollback
-          setProducts(prevProds);
-          throw e;
-        }
-      },
-      [categories, products, categoryByName, fetchData]
-    );
-
-  const reorderProductsFn: (category: string, productId: string, newIndex: number) => Promise<void> =
-    useCallback(
-      async (category, productId, newIndex) => {
-        console.log('[reorderProductsFn] Reordering:', { category, productId, newIndex });
-        
-        // Snapshot do estado atual para rollback
-        const snapshot = products.slice();
-        
-        const categoryProducts = products
-          .filter((p) => p.category === category)
-          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-        
-        const productIndex = categoryProducts.findIndex((p) => p.id === productId);
-        if (productIndex === -1) {
-          console.warn('[reorderProductsFn] Product not found in category');
-          return;
-        }
-        
-        // Se a posição não mudou, não fazer nada
-        if (productIndex === newIndex) {
-          console.log('[reorderProductsFn] No change in position');
-          return;
-        }
-        
-        // Reordenar localmente (otimista)
-        const [movedProduct] = categoryProducts.splice(productIndex, 1);
-        categoryProducts.splice(newIndex, 0, movedProduct);
-        
-        // Atualizar os índices de ordem
-        const updatedProducts = categoryProducts.map((p, idx) => ({
-          ...p,
-          order: idx
-        }));
-        
-        // Atualizar estado local IMEDIATAMENTE
-        setProducts((prev) => {
-          const otherProducts = prev.filter((p) => p.category !== category);
-          return [...otherProducts, ...updatedProducts];
-        });
-        
-        try {
-          // Enviar a nova ordem para o backend
-          const response = await api.patch(`/products/${productId}/reorder`, { 
-            category,
-            newOrder: newIndex 
-          });
-          
-          console.log('[reorderProductsFn] Backend response:', response.data);
-          
-          // Atualizar com os dados do backend para garantir consistência
-          if (response.data) {
-            const updatedProduct = mapProductDTO(response.data);
-            setProducts((prev) => 
-              prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
-            );
-          }
-        } catch (e) {
-          console.error('[reorderProductsFn] Error:', e);
-          // Rollback para o snapshot
-          setProducts(snapshot);
-          throw e;
-        }
-      },
-      [products]
-    );
-
-  const deleteCategoryFn: (name: string) => Promise<void> = useCallback(
-    async (name) => {
-      const prevCats = categories;
-      setCategories((prev) => prev.filter((c) => c !== name)); // otimista
-      try {
-        // resolve id pelo nome
-        let id = categoryByName[name];
-        if (!id) {
-          await fetchData(); // tenta refrescar
-          id = categoryByName[name];
-        }
-        if (!id) throw new Error('Categoria não encontrada para exclusão.');
-
-        await api.delete(`/categories/${encodeURIComponent(id)}`);
-        await fetchData(); // re-sync opcional
-      } catch (e) {
-        setCategories(prevCats); // rollback
-        throw e;
-      }
-    },
-    [categories, categoryByName, fetchData]
-  );
-
-  const reorderCategoriesFn: (categoryName: string, newIndex: number) => Promise<void> =
-    useCallback(
-      async (categoryName, newIndex) => {
-        console.log('[reorderCategoriesFn] Reordering:', { categoryName, newIndex });
-        
-        // Snapshot do estado atual para rollback
-        const prevCategories = categories.slice();
-        
-        const categoryIndex = categories.indexOf(categoryName);
-        if (categoryIndex === -1) {
-          console.warn('[reorderCategoriesFn] Category not found');
-          return;
-        }
-        
-        // Se a posição não mudou, não fazer nada
-        if (categoryIndex === newIndex) {
-          console.log('[reorderCategoriesFn] No change in position');
-          return;
-        }
-        
-        // Reordenar localmente (otimista)
-        const updatedCategories = [...categories];
-        const [movedCategory] = updatedCategories.splice(categoryIndex, 1);
-        updatedCategories.splice(newIndex, 0, movedCategory);
-        
-        // Atualizar estado local IMEDIATAMENTE
-        setCategories(updatedCategories);
-        
-        try {
-          // resolve id pelo nome
-          let id = categoryByName[categoryName];
-          if (!id) {
-            await fetchData(); // tenta refrescar
-            id = categoryByName[categoryName];
-          }
-          if (!id) throw new Error('Categoria não encontrada para reordenação.');
-
-          // Enviar a nova ordem para o backend
-          const response = await api.patch(`/categories/${encodeURIComponent(id)}/reorder`, { 
-            newOrder: newIndex 
-          });
-          
-          console.log('[reorderCategoriesFn] Backend response:', response.data);
-          
-          // Re-fetch para garantir consistência com o backend
-          await fetchData();
-        } catch (e) {
-          console.error('[reorderCategoriesFn] Error:', e);
-          // Rollback para o snapshot
-          setCategories(prevCategories);
-          throw e;
-        }
-      },
-      [categories, categoryByName, fetchData]
-    );
-
-  // ---------- Value memoizado ----------
+  // =====================
+  // Value
+  // =====================
   const value: ProductsCtx = useMemo(
     () => ({
       products,
       categories,
       loading,
       error,
-
       fetchData,
-
-      addProduct: addProductFn,
-      updateProduct: updateProductFn,
-      deleteProduct: deleteProductFn,
-      moveProduct: moveProductFn,
-      reorderProducts: reorderProductsFn,
-
-      addCategory: addCategoryFn,
-      updateCategory: updateCategoryFn,
-      deleteCategory: deleteCategoryFn,
-      reorderCategories: reorderCategoriesFn,
+      addProduct,
+      updateProduct,
+      deleteProduct,
+      moveProduct,
+      reorderProducts,
+      addCategory,
+      updateCategory,
+      deleteCategory,
+      reorderCategories,
     }),
     [
       products,
@@ -625,30 +585,26 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       loading,
       error,
       fetchData,
-      addProductFn,
-      updateProductFn,
-      deleteProductFn,
-      moveProductFn,
-      reorderProductsFn,
-      addCategoryFn,
-      updateCategoryFn,
-      deleteCategoryFn,
-      reorderCategoriesFn,
+      addProduct,
+      updateProduct,
+      deleteProduct,
+      moveProduct,
+      reorderProducts,
+      addCategory,
+      updateCategory,
+      deleteCategory,
+      reorderCategories,
     ]
   );
 
-  return (
-    <ProductsContext.Provider value={value}>
-      {children}
-    </ProductsContext.Provider>
-  );
+  return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
 };
 
-// ---------- Hook de consumo ----------
+// =====================
+// Hook
+// =====================
 export const useProducts = () => {
   const ctx = useContext(ProductsContext);
-  if (!ctx) {
-    throw new Error('useProducts must be used within a ProductsProvider');
-  }
+  if (!ctx) throw new Error("useProducts must be used within a ProductsProvider");
   return ctx;
 };
