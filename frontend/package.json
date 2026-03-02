@@ -3,12 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && vite build",
-    "dev": "vite",
-    "preview": "vite preview --port 4173"
-  },
+ "scripts": {
+  "build": "vite build", 
+  "dev": "vite",
+  "preview": "vite preview"
+},
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-dialog": "^1.1.15",
