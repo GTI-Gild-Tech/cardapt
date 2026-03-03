@@ -1,0 +1,7 @@
+[build]
+  base = "frontend"
+  command = "npm ci && npm run build"  # npm ci é mais confiável para CI/CD
+  publish = "dist"
+
+[build.environment]
+  NPM_FLAGS = "--legacy-peer-deps" # se necessário
