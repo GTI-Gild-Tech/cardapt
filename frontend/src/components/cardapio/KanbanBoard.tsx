@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Cropper from "react-easy-crop";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DraggableCategoryColumn, Product } from "./KanbanComponents";
 import { useProducts } from "../context/ProductsContext";
+import { useAuth } from "../auth/AuthContext";
 import svgPaths from "../../imports/svg-gf3getow1k";
 import {
   Dialog,
@@ -708,6 +710,7 @@ function EditProductModal({ product, isOpen, onClose, onSave, categories }: Edit
 }
 
 export function KanbanBoard() {
+  const navigate = useNavigate();
   const { 
     products, 
     categories, 
@@ -722,6 +725,7 @@ export function KanbanBoard() {
     reorderCategories
   } = useProducts();
   
+  const { isAuthenticated } = useAuth();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
@@ -736,6 +740,10 @@ export function KanbanBoard() {
   }, [categories]);
 
   const handleMoveProduct = (productId: string, newCategory: string) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     console.log('KanbanBoard.handleMoveProduct:', { productId, newCategory });
     moveProduct(productId, newCategory).catch(err => {
       console.error('Error in handleMoveProduct:', err);
@@ -744,6 +752,10 @@ export function KanbanBoard() {
   };
 
   const handleReorderProducts = (category: string, productId: string, newIndex: number) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     console.log('KanbanBoard.handleReorderProducts:', { category, productId, newIndex });
     
     // Debounce: cancelar chamadas anteriores pendentes
@@ -761,6 +773,10 @@ export function KanbanBoard() {
   };
 
   const handleReorderCategories = (categoryName: string, newIndex: number) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     console.log('KanbanBoard.handleReorderCategories:', { categoryName, newIndex });
     
     // Debounce: cancelar chamadas anteriores pendentes
@@ -778,12 +794,21 @@ export function KanbanBoard() {
   };
 
   const handleEditProduct = (product: Product) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     setEditingProduct(product);
     setIsEditModalOpen(true);
   };
 
   // ⬇️ agora recebe o arquivo opcional vindo do modal
   const handleSaveProduct = (updatedProduct: Product, imageFile?: File) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
+    
     if (!products.find(p => p.id === updatedProduct.id)) {
       addProduct(updatedProduct, imageFile);   // cria com foto (FormData se vier file)
     } else {
@@ -792,18 +817,30 @@ export function KanbanBoard() {
   };
 
   const handleDeleteProduct = (productId: string) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     if (confirm('Tem certeza que deseja excluir este produto?')) {
       deleteProduct(productId);
     }
   };
 
   const handleAddNewProduct = () => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     setEditingProduct(null);
     setIsEditModalOpen(true);
   };
 
  
   const handleAddNewCategory = () => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     setNewCategoryName('');
     setIsCategoryModalOpen(true);
   };
@@ -830,6 +867,10 @@ export function KanbanBoard() {
   };
 
   const handleDeleteCategory = (categoryToDelete: string) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     const productsInCategory = products.filter(p => p.category === categoryToDelete);
     
     if (productsInCategory.length > 0) {
@@ -848,6 +889,10 @@ export function KanbanBoard() {
   };
 
   const handleEditCategory = (categoryToEdit: string) => {
+    if (!isAuthenticated) {
+      navigate("/dashboard-admin/login");
+      return;
+    }
     setEditingCategory(categoryToEdit);
     setNewCategoryName(categoryToEdit);
     setIsEditCategoryModalOpen(true);

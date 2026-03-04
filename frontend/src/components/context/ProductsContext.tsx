@@ -1,3 +1,4 @@
+// ProductsContext.tsx
 import React, {
   createContext,
   useContext,
@@ -8,8 +9,8 @@ import React, {
   PropsWithChildren,
 } from "react";
 import type { Product } from "../cardapio/KanbanComponents";
- import { supabase } from '../../lib/supabase';
-
+import { supabase } from '../../lib/supabase';
+import { useAuth } from '../auth/AuthContext'; // ← IMPORTANTE: importar useAuth
 
 // =====================
 // Helpers (preço/JSON)
@@ -65,27 +66,39 @@ function sizesJsonToProductSizes(sizes: any): { size: string; price: number; qty
 // Storage (imagem)
 // =====================
 
-const BUCKET = "product-images"; // crie esse bucket no Supabase Storage
+const BUCKET = "imagensProdutos"; // ← seu bucket
 
 function buildImagePath(productId: string, file: File) {
   const ext = (file.name.split(".").pop() || "png").toLowerCase();
   return `products/${productId}/${Date.now()}.${ext}`;
 }
 
-async function uploadProductImage(productId: string, file: File) {
-  const path = buildImagePath(productId, file);
+// ProductsContext.tsx - função uploadProductImage
+async function uploadProductImage(productId: string, file: File, user: any) {
+  // O user agora virá do mock ou do Supabase
+  if (!user) {
+    throw new Error('Usuário não está autenticado');
+  }
 
+  console.log('Upload com usuário:', user.email || user.id);
+
+  const path = buildImagePath(productId, file);
+  
   const { error: upErr } = await supabase.storage
     .from(BUCKET)
-    .upload(path, file, { upsert: true });
+    .upload(path, file, { 
+      upsert: true,
+      contentType: file.type 
+    });
 
-  if (upErr) throw upErr;
+  if (upErr) {
+    console.error('Erro no upload:', upErr);
+    throw upErr;
+  }
 
-  // Se o bucket for público:
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
   return data.publicUrl;
 }
-
 // =====================
 // Tipos do Contexto
 // =====================
@@ -117,10 +130,15 @@ const ProductsContext = createContext<ProductsCtx | undefined>(undefined);
 // =====================
 
 export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const { user, isAuthenticated } = useAuth(); // ← PEGA O USUÁRIO DO CONTEXTO
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+    // DEBUG - veja se o usuário está chegando
+  console.log('ProductsProvider - user:', user);
+  console.log('ProductsProvider - isAuthenticated:', isAuthenticated);
 
   // name -> id
   const [categoryByName, setCategoryByName] = useState<Record<string, string>>({});
@@ -202,6 +220,10 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   // =====================
   const addCategory = useCallback(
     async (name: string) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para adicionar categorias');
+      }
+
       const n = name.trim();
       if (!n) return;
 
@@ -231,11 +253,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setCategoryByName((m) => ({ ...m, [n]: String(data.id) }));
       setCategoryNameById((m) => ({ ...m, [String(data.id)]: n }));
     },
-    [categories]
+    [categories, isAuthenticated]
   );
 
   const updateCategory = useCallback(
     async (oldName: string, newName: string) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para editar categorias');
+      }
+
       const nn = newName.trim();
       if (!nn) return;
       if (oldName === nn) return;
@@ -268,11 +294,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       });
       setCategoryNameById((m) => ({ ...m, [id]: nn }));
     },
-    [categories, products, categoryByName]
+    [categories, products, categoryByName, isAuthenticated]
   );
 
   const deleteCategory = useCallback(
     async (name: string) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para excluir categorias');
+      }
+
       const id = categoryByName[name];
       if (!id) throw new Error("Categoria não encontrada (map name->id vazio).");
 
@@ -301,11 +331,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         return clone;
       });
     },
-    [categoryByName, categories, products]
+    [categoryByName, categories, products, isAuthenticated]
   );
 
   const reorderCategories = useCallback(
     async (categoryName: string, newIndex: number) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para reordenar categorias');
+      }
+
       const currIndex = categories.indexOf(categoryName);
       if (currIndex === -1) return;
       if (currIndex === newIndex) return;
@@ -335,7 +369,7 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         throw e;
       }
     },
-    [categories, categoryByName]
+    [categories, categoryByName, isAuthenticated]
   );
 
   // =====================
@@ -343,6 +377,10 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   // =====================
   const addProduct = useCallback(
     async (p: Product, imageFile?: File) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para adicionar produtos');
+      }
+
       const catId = categoryByName[p.category];
       if (!catId) throw new Error("Categoria inválida (sem id). Crie a categoria antes.");
 
@@ -362,7 +400,7 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         order: newOrder,
         imageUrl: tempUrl ?? "",
       };
-      setProducts((prev) => [optimistic, ...prev]);
+      setProducts((prev) => [...prev, optimistic]);
 
       try {
         // 1) insert no banco (sem imagem primeiro)
@@ -371,7 +409,7 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
           name: p.name,
           description: p.description ?? "",
           order: newOrder,
-          sizes: productToSizesJson(p), // jsonb
+          sizes: productToSizesJson(p),
           image_url: null as string | null,
         };
 
@@ -387,14 +425,21 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
         // 2) upload imagem se veio arquivo
         if (imageFile) {
-          imageUrlFinal = await uploadProductImage(String(created.id), imageFile);
+          try {
+            imageUrlFinal = await uploadProductImage(String(created.id), imageFile, user);
+            
+            if (imageUrlFinal) {
+              const { error: imgErr } = await supabase
+                .from("products")
+                .update({ image_url: imageUrlFinal })
+                .eq("id", created.id);
 
-          const { error: imgErr } = await supabase
-            .from("products")
-            .update({ image_url: imageUrlFinal })
-            .eq("id", created.id);
-
-          if (imgErr) throw imgErr;
+              if (imgErr) throw imgErr;
+            }
+          } catch (uploadErr) {
+            console.error('Erro no upload da imagem:', uploadErr);
+            // Continua mesmo sem imagem - não interrompe a criação do produto
+          }
         }
 
         // 3) substituir o produto otimista
@@ -404,7 +449,7 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
           description: created.description ?? "",
           category: p.category,
           sizes: sizesJsonToProductSizes(created.sizes),
-          imageUrl: imageUrlFinal ?? "",
+          imageUrl: imageUrlFinal || "",
           order: created.order ?? 0,
         };
 
@@ -417,16 +462,23 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         if (imageFile && tempUrl) URL.revokeObjectURL(tempUrl);
       }
     },
-    [categoryByName, products]
+    [categoryByName, products, isAuthenticated, user]
   );
 
   const updateProduct = useCallback(
     async (p: Product, imageFile?: File) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para atualizar produtos');
+      }
+
       const prev = products.find((x) => x.id === p.id);
       if (!prev) return;
 
       const catId = categoryByName[p.category];
       if (!catId) throw new Error("Categoria inválida (sem id).");
+
+      // Salva estado anterior para rollback
+      const prevProduct = { ...prev };
 
       // otimista
       replaceProductLocal(p);
@@ -434,8 +486,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       try {
         let imageUrlFinal = p.imageUrl ?? prev.imageUrl ?? "";
 
+        // Se tem novo arquivo, faz upload
         if (imageFile) {
-          imageUrlFinal = await uploadProductImage(p.id, imageFile);
+          try {
+            imageUrlFinal = await uploadProductImage(p.id, imageFile, user);
+          } catch (uploadErr) {
+            console.error('Erro no upload da imagem:', uploadErr);
+            // Se falhar o upload, mantém a imagem anterior
+            imageUrlFinal = prev.imageUrl ?? "";
+          }
         }
 
         const payload = {
@@ -468,15 +527,19 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         replaceProductLocal(updated);
       } catch (e) {
         // rollback
-        replaceProductLocal(prev);
+        replaceProductLocal(prevProduct);
         throw e;
       }
     },
-    [products, categoryByName, categoryNameById, replaceProductLocal]
+    [products, categoryByName, categoryNameById, replaceProductLocal, isAuthenticated, user]
   );
 
   const deleteProduct = useCallback(
     async (id: string) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para excluir produtos');
+      }
+
       const snapshot = products.slice();
 
       // otimista
@@ -488,11 +551,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         throw delErr;
       }
     },
-    [products, removeProductLocal]
+    [products, removeProductLocal, isAuthenticated]
   );
 
   const moveProduct = useCallback(
     async (id: string, newCategory: string) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para mover produtos');
+      }
+
       const prev = products.find((x) => x.id === id);
       if (!prev) return;
 
@@ -519,11 +586,15 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         throw upErr;
       }
     },
-    [products, categoryByName, replaceProductLocal]
+    [products, categoryByName, replaceProductLocal, isAuthenticated]
   );
 
   const reorderProducts = useCallback(
     async (category: string, productId: string, newIndex: number) => {
+      if (!isAuthenticated) {
+        throw new Error('Você precisa estar logado para reordenar produtos');
+      }
+
       const snapshot = products.slice();
 
       const list = products
@@ -556,7 +627,7 @@ export const ProductsProvider: React.FC<PropsWithChildren> = ({ children }) => {
         throw e;
       }
     },
-    [products]
+    [products, isAuthenticated]
   );
 
   // =====================
