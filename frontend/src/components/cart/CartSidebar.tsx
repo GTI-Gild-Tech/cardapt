@@ -213,7 +213,7 @@ export default function CartSidebar({ isOpen, onClose }: Props) {
                   onClick={goToDetails}
                   disabled={!canContinue}
                 >
-                  Continuar pedindo
+                  Finalizar pedido
                 </button>
             </div>
           ) : (
