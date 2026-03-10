@@ -1,7 +1,12 @@
 [build]
-  base = "frontend"
-  command = "npm ci && npm run build"  # npm ci é mais confiável para CI/CD
+  command = "npm ci && npm run build"
   publish = "dist"
 
 [build.environment]
-  NPM_FLAGS = "--legacy-peer-deps" # se necessário
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Redirecionamentos para SPA (React Router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
