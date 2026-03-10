@@ -54,7 +54,7 @@ export function Home({ onOpenCart }: HomeProps) {
       </div>
 
       {/* Main Content Section */}
-      <div className="bg-[#f0eee9] ">
+      <div className="bg-bgBege ">
         <div className="max-w-[1129px] mx-auto px-4 ">
           {/* Usamos o HomeContent que lê do ProductsContext (mesmo da dashboard) */}
           <HomeContent />

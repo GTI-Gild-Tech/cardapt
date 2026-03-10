@@ -2669,7 +2669,7 @@ function Frame4834() {
 function IPhone163() {
   return (
     <div
-      className="absolute bg-[#f0eee9] h-[1117px] left-[1143px] overflow-clip top-0 w-[585px]"
+      className="absolute bg-bgBege h-[1117px] left-[1143px] overflow-clip top-0 w-[585px]"
       data-name="iPhone 16 - 3"
     >
       <Frame4834 />

@@ -7085,7 +7085,7 @@ function Frame4789() {
 
 export default function MacBookPro161() {
   return (
-    <div className="bg-[#f0eee9] relative size-full" data-name="MacBook Pro 16' - 1">
+    <div className="bg-bgBege relative size-full" data-name="MacBook Pro 16' - 1">
       <Background1 />
       <Navbar />
       <Camada2 />

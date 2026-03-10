@@ -6,7 +6,7 @@ import Navbar from "./navigation/Navbar";
 
 export function DashboardLayout() {
   return (
-    <div className="bg-[#f0eee9] h-screen">
+    <div className="bg-bgBege h-full">
       {/* Navbar fica sempre fixa dentro deste layout */}
       <Navbar />
       {/* O Outlet renderiza o componente da rota filha */}

@@ -2484,7 +2484,7 @@ function Frame148() {
 function Frame149() {
   return (
     <div className="bg-primary box-border content-stretch flex flex-col gap-2.5 items-center justify-center px-0.5 py-[3px] relative rounded-sm shrink-0 size-[35px]">
-      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-[#f0eee9] text-[20px] text-center w-full">
+      <div className="flex flex-col font-['Rethink_Sans:Regular',_sans-serif] font-normal h-[17px] justify-center leading-[0] relative shrink-0 text-bgBege text-[20px] text-center w-full">
         <p className="block leading-[0px]">M</p>
       </div>
     </div>
@@ -2730,7 +2730,7 @@ function Frame4835() {
 function IPhone163() {
   return (
     <div
-      className="absolute bg-[#f0eee9] h-[1117px] left-[1143px] overflow-clip top-0 w-[585px]"
+      className="absolute bg-bgBege h-[1117px] left-[1143px] overflow-clip top-0 w-[585px]"
       data-name="iPhone 16 - 3"
     >
       <Frame4835 />

@@ -76,7 +76,7 @@ export function Checkout({ isOpen, onClose, onBackToCart, items, onOrderComplete
         
         {/* Checkout Screen */}
         <motion.div 
-          className="ml-auto bg-[#f0eee9] w-[585px] h-full relative overflow-hidden"
+          className="ml-auto bg-bgBege w-[585px] h-full relative overflow-hidden"
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}

@@ -655,7 +655,7 @@ function MainContainer() {
 
 export default function Desktop() {
   return (
-    <div className="bg-[#f0eee9] relative size-full" data-name="Desktop">
+    <div className="bg-bgBege relative size-full" data-name="Desktop">
       <MainContainer />
     </div>
   );

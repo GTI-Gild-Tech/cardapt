@@ -6,7 +6,7 @@ export function CardapioContent() {
       <div className="font-['PrimaryFont:Demo',_sans-serif] leading-[0] not-italic relative shrink-0 text-textColorPrimary text-[64px] text-nowrap tracking-[-1.28px]">
         <p className="leading-[1.5] whitespace-pre font-[PrimaryFont]">Cardapio</p>
       </div>
-      <div className="flex-grow w-full bg-[#f0eee9]">
+      <div className="flex-grow w-full bg-bgBege">
         <KanbanBoard />
       </div>
     </div>

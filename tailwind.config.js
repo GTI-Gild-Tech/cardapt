@@ -28,6 +28,8 @@ export default {
 
         bgCardsKanban: "#f1ece7",
         bgCardsKanbanHover: "#e3dbd4", // mais forte
+
+        bgBege: "#f0eee9",
       }
     },
   },

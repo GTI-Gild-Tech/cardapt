@@ -570,7 +570,7 @@ function MainContainer() {
 
 function Desktop() {
   return (
-    <div className="absolute bg-[#f0eee9] h-[1140px] left-0 overflow-clip top-0 w-[1728px]" data-name="Desktop">
+    <div className="absolute bg-bgBege h-[1140px] left-0 overflow-clip top-0 w-[1728px]" data-name="Desktop">
       <MainContainer />
     </div>
   );

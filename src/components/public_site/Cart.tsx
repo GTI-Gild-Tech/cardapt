@@ -52,7 +52,7 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
       
       {/* Cart Sidebar */}
       <motion.div 
-        className="ml-auto bg-[#f0eee9] w-[585px] h-full relative overflow-hidden"
+        className="ml-auto bg-bgBege w-[585px] h-full relative overflow-hidden"
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
@@ -105,7 +105,7 @@ export function Cart({ isOpen, onClose, onClearCart, items, onUpdateQuantity, on
                   </Button>
                 </motion.div>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-[#f0eee9] border-primary">
+              <AlertDialogContent className="bg-bgBege border-primary">
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-textColorPrimary font-['Rethink_Sans:Bold',sans-serif]">
                     Apagar carrinho?
