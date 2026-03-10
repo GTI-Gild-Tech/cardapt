@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext"; // ← importa o hook
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState(""); // ← mudou de username para email
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
