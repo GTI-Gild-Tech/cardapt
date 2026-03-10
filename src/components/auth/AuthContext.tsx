@@ -21,12 +21,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        console.log('AuthProvider - sessão encontrada:', session?.user?.email);
+        console.log('AuthProvider - verificando sessão...');
+        console.log('AuthProvider - URL atual:', window.location.origin);
+        
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error("AuthProvider - erro ao verificar sessão:", error);
+        }
+        
+        console.log('AuthProvider - sessão encontrada:', session?.user?.email ?? 'nenhuma');
         setUser(session?.user ?? null);
         setIsAuthenticated(!!session?.user);
       } catch (error) {
-        console.error("Erro ao verificar sessão:", error);
+        console.error("AuthProvider - exceção ao verificar sessão:", error);
       } finally {
         setLoading(false);
       }
@@ -34,8 +42,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     checkSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log('AuthProvider - mudança de estado:', _event, session?.user?.email);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('AuthProvider - evento de autenticação:', event);
+      console.log('AuthProvider - usuário:', session?.user?.email ?? 'deslogado');
+      
       setUser(session?.user ?? null);
       setIsAuthenticated(!!session?.user);
       setLoading(false);
@@ -49,19 +59,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setLoading(true);
       
       console.log('AuthProvider - tentando login com:', email);
+      console.log('AuthProvider - URL de redirecionamento:', window.location.origin);
       
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+        email: email.trim(),
+        password: password.trim()
       });
 
       if (error) {
-        console.error("Erro no login:", error.message);
+        console.error("AuthProvider - erro no login:", error.message);
         return false;
       }
 
       if (data.user) {
         console.log('AuthProvider - login bem-sucedido:', data.user.email);
+        console.log('AuthProvider - sessão:', data.session ? 'criada' : 'falhou');
+        
         setUser(data.user);
         setIsAuthenticated(true);
         return true;
@@ -69,7 +82,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
       return false;
     } catch (error) {
-      console.error("Erro no login:", error);
+      console.error("AuthProvider - exceção no login:", error);
       return false;
     } finally {
       setLoading(false);
@@ -79,11 +92,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = async () => {
     try {
       setLoading(true);
-      await supabase.auth.signOut();
-      setUser(null);
-      setIsAuthenticated(false);
+      console.log('AuthProvider - fazendo logout');
+      
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error("AuthProvider - erro no logout:", error);
+      } else {
+        console.log('AuthProvider - logout bem-sucedido');
+        setUser(null);
+        setIsAuthenticated(false);
+      }
     } catch (error) {
-      console.error("Erro no logout:", error);
+      console.error("AuthProvider - exceção no logout:", error);
     } finally {
       setLoading(false);
     }
